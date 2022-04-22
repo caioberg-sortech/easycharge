@@ -4,6 +4,7 @@ import br.com.alura.srtch.StatusCliente;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByNames;
 import com.opencsv.bean.CsvIgnore;
+import com.opencsv.bean.CsvRecurse;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -38,6 +39,7 @@ public class Cliente {
   private BigDecimal renda;
 
   @OneToOne
+  @CsvRecurse
   private Endereco endereco;
 
   @CsvBindByName
