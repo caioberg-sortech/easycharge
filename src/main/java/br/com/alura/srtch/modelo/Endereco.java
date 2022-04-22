@@ -13,20 +13,26 @@ public class Endereco {
     private Long id;
 
     @CsvBindByName(required = true,format = "varchar(255)")
+    @Column(nullable = false)
     private String rua;
 
     @CsvBindByName(required = true,format = "varchar(255)")
+    @Column(nullable = false)
     private String numero;
 
+    @Column
     private String complemento;
 
     @CsvBindByName(required = true,format = "varchar(255)")
+    @Column(nullable = false)
     private String bairro;
 
     @CsvBindByName(required = true,format = "varchar(255)")
+    @Column(nullable = false)
     private String cidade;
 
     @CsvBindByName(required = true,format = "varchar(255)")
+    @Column(nullable = false)
     private String estado;
 
     public Endereco(){};

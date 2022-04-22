@@ -5,10 +5,7 @@ import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByNames;
 import com.opencsv.bean.CsvIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -16,28 +13,34 @@ import java.math.BigDecimal;
 public class Cliente {
 
   @Id
-  @CsvBindByName(required = true,format = "varchar(255)")
+  @CsvBindByName
+  @Column(nullable = false)
   private String nome;
 
-  @CsvBindByName(required = true, format = "varchar(255)")
+  @CsvBindByName
+  @Column(nullable = false)
   private String cpf;
 
-  @CsvBindByName(required = false, format = "varchar(255)")
+  @CsvBindByName
+  @Column(nullable = false)
   private String telefone;
 
-  @CsvBindByName(required = true,format = "varchar(255)")
+  @CsvBindByName
+  @Column(nullable = false)
   private String email;
 
-  @CsvBindByName(required = true,format = "varchar(255)")
+  @CsvBindByName
+  @Column(nullable = false)
   private String profissao;
 
   @CsvBindByName(required = true)
+  @Column(nullable = false)
   private BigDecimal renda;
 
   @OneToOne
   private Endereco endereco;
 
-  @CsvBindByName(required = true)
+  @CsvBindByName
   private StatusCliente status;
 
   public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, Endereco endereco, StatusCliente status) {
@@ -50,6 +53,8 @@ public class Cliente {
     this.endereco = endereco;
     this.status = status;
   }
+
+  public Cliente() {}
 
   public String getNome() {
     return nome;
