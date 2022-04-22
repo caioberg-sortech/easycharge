@@ -41,6 +41,7 @@ public class Cliente {
   private Endereco endereco;
 
   @CsvBindByName
+  @Enumerated(EnumType.STRING)
   private StatusCliente status;
 
   public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, Endereco endereco, StatusCliente status) {
