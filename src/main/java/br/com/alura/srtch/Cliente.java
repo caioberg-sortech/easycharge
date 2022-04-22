@@ -2,6 +2,7 @@ package br.com.alura.srtch;
 
 import com.opencsv.bean.CsvBindByName;
 
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 public class Cliente {
@@ -19,28 +20,13 @@ public class Cliente {
   private String email;
 
   @CsvBindByName
-  private String rua;
-
-  @CsvBindByName
-  private String numero;
-
-  @CsvBindByName
-  private String complemento;
-
-  @CsvBindByName
-  private String bairro;
-
-  @CsvBindByName
-  private String cidade;
-
-  @CsvBindByName
-  private String estado;
-
-  @CsvBindByName
   private String profissao;
 
   @CsvBindByName
   private BigDecimal renda;
+
+  @OneToOne
+  private Endereco endereco;
 
   @CsvBindByName
   private StatusCliente status;
@@ -77,54 +63,6 @@ public class Cliente {
     this.email = email;
   }
 
-  public String getRua() {
-    return rua;
-  }
-
-  public void setRua(String rua) {
-    this.rua = rua;
-  }
-
-  public String getNumero() {
-    return numero;
-  }
-
-  public void setNumero(String numero) {
-    this.numero = numero;
-  }
-
-  public String getComplemento() {
-    return complemento;
-  }
-
-  public void setComplemento(String complemento) {
-    this.complemento = complemento;
-  }
-
-  public String getBairro() {
-    return bairro;
-  }
-
-  public void setBairro(String bairro) {
-    this.bairro = bairro;
-  }
-
-  public String getCidade() {
-    return cidade;
-  }
-
-  public void setCidade(String cidade) {
-    this.cidade = cidade;
-  }
-
-  public String getEstado() {
-    return estado;
-  }
-
-  public void setEstado(String estado) {
-    this.estado = estado;
-  }
-
   public String getProfissao() {
     return profissao;
   }
@@ -149,6 +87,14 @@ public class Cliente {
     this.status = status;
   }
 
+  public Endereco getEndereco() {
+    return endereco;
+  }
+
+  public void setEndereco(Endereco endereco) {
+    this.endereco = endereco;
+  }
+
   @Override
   public String toString() {
     return "Cliente{" +
@@ -156,12 +102,12 @@ public class Cliente {
         ", cpf='" + cpf + '\'' +
         ", telefone='" + telefone + '\'' +
         ", email='" + email + '\'' +
-        ", rua='" + rua + '\'' +
-        ", numero='" + numero + '\'' +
-        ", complemento='" + complemento + '\'' +
-        ", bairro='" + bairro + '\'' +
-        ", cidade='" + cidade + '\'' +
-        ", estado='" + estado + '\'' +
+        ", rua='" + endereco.getRua() + '\'' +
+        ", numero='" + endereco.getNumero() + '\'' +
+        ", complemento='" + endereco.getComplemento() + '\'' +
+        ", bairro='" + endereco.getBairro() + '\'' +
+        ", cidade='" + endereco.getCidade() + '\'' +
+        ", estado='" + endereco.getEstado() + '\'' +
         ", profissao='" + profissao + '\'' +
         ", renda=" + renda +
         ", status=" + status +

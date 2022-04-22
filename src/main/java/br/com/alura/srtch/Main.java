@@ -21,31 +21,7 @@ public class Main {
 
     String arquivo = args[0];
 
-    List<Cliente> clientes;
-
-    if (arquivo.endsWith(".csv")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
-            .withType(Cliente.class)
-            .build();
-        clientes = csvToBean.parse();
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
-      }
-    } else if (arquivo.endsWith(".json")) {
-      try {
-        Reader reader = new FileReader(arquivo);
-        ObjectMapper mapper = new ObjectMapper();
-
-        clientes = mapper.readValue(reader, new TypeReference<>() {
-        });
-      } catch (IOException ex) {
-        throw new IllegalStateException(ex);
-      }
-    } else {
-      throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
-    }
+    List<Cliente> clientes = new LeituraDados().lerArquivo(arquivo);
 
     System.out.println("# Limites de dívidas dos clientes");
     for (Cliente cliente : clientes) {
