@@ -1,25 +1,32 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.modelo;
 
 import com.opencsv.bean.CsvBindByName;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "enderecos")
 public class Endereco {
 
-    @CsvBindByName
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @CsvBindByName(required = true,format = "varchar(255)")
     private String rua;
 
-    @CsvBindByName
+    @CsvBindByName(required = true,format = "varchar(255)")
     private String numero;
 
-    @CsvBindByName
     private String complemento;
 
-    @CsvBindByName
+    @CsvBindByName(required = true,format = "varchar(255)")
     private String bairro;
 
-    @CsvBindByName
+    @CsvBindByName(required = true,format = "varchar(255)")
     private String cidade;
 
-    @CsvBindByName
+    @CsvBindByName(required = true,format = "varchar(255)")
     private String estado;
 
     public Endereco(){};

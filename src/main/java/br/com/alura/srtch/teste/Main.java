@@ -1,13 +1,10 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.teste;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.service.ClientesPorEstado;
+import br.com.alura.srtch.service.ClientesSuspensos;
+import br.com.alura.srtch.service.LeituraDados;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
@@ -23,25 +20,14 @@ public class Main {
 
     List<Cliente> clientes = new LeituraDados().lerArquivo(arquivo);
 
+
     System.out.println("# Limites de dívidas dos clientes");
     for (Cliente cliente : clientes) {
       BigDecimal limiteDivida = cliente.getRenda().multiply(BigDecimal.valueOf(12));
       System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.\n", cliente.getNome(), limiteDivida);
     }
 
-    BigDecimal somaRendaClientesSuspensos = BigDecimal.ZERO;
-    int numeroClientesSuspensos = 0;
-    for (Cliente cliente : clientes) {
-      if (StatusCliente.SUSPENSO.equals(cliente.getStatus())) {
-        numeroClientesSuspensos++;
-        somaRendaClientesSuspensos = somaRendaClientesSuspensos.add(cliente.getRenda());
-      }
-    }
-    BigDecimal mediaRendaClientesSuspensos = somaRendaClientesSuspensos.divide(BigDecimal.valueOf(numeroClientesSuspensos), 2, RoundingMode.HALF_UP);
-
-    System.out.printf("\nHá %s clientes suspensos.\n", numeroClientesSuspensos);
-    System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f\n\n", mediaRendaClientesSuspensos);
-
+   new ClientesSuspensos().rendaClientesSuspensos(clientes);
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
     for (Cliente cliente : clientes) {

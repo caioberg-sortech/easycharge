@@ -1,5 +1,7 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.service;
 
+import br.com.alura.srtch.modelo.Cliente;
+import br.com.alura.srtch.modelo.Endereco;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.opencsv.bean.CsvToBean;
@@ -8,6 +10,8 @@ import com.opencsv.bean.CsvToBeanBuilder;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class LeituraDados {
@@ -15,10 +19,12 @@ public class LeituraDados {
     public List<Cliente> lerArquivo(String arquivo){
 
         List<Cliente> clientes;
+        List<Endereco> enderecos;
 
         if (arquivo.endsWith(".csv")) {
             try {
                 Reader reader = new FileReader(arquivo);
+
                 CsvToBean<Cliente> csvToBean = new CsvToBeanBuilder<Cliente>(reader)
                         .withType(Cliente.class)
                         .build();
@@ -39,7 +45,6 @@ public class LeituraDados {
         } else {
             throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
         }
-
         return clientes;
     }
 }

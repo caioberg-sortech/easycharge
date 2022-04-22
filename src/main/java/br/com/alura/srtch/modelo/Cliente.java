@@ -1,35 +1,55 @@
-package br.com.alura.srtch;
+package br.com.alura.srtch.modelo;
 
+import br.com.alura.srtch.StatusCliente;
 import com.opencsv.bean.CsvBindByName;
+import com.opencsv.bean.CsvBindByNames;
+import com.opencsv.bean.CsvIgnore;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "clientes")
 public class Cliente {
 
-  @CsvBindByName
+  @Id
+  @CsvBindByName(required = true,format = "varchar(255)")
   private String nome;
 
-  @CsvBindByName
+  @CsvBindByName(required = true, format = "varchar(255)")
   private String cpf;
 
-  @CsvBindByName
+  @CsvBindByName(required = false, format = "varchar(255)")
   private String telefone;
 
-  @CsvBindByName
+  @CsvBindByName(required = true,format = "varchar(255)")
   private String email;
 
-  @CsvBindByName
+  @CsvBindByName(required = true,format = "varchar(255)")
   private String profissao;
 
-  @CsvBindByName
+  @CsvBindByName(required = true)
   private BigDecimal renda;
 
   @OneToOne
   private Endereco endereco;
 
-  @CsvBindByName
+  @CsvBindByName(required = true)
   private StatusCliente status;
+
+  public Cliente(String nome, String cpf, String telefone, String email, String profissao, BigDecimal renda, Endereco endereco, StatusCliente status) {
+    this.nome = nome;
+    this.cpf = cpf;
+    this.telefone = telefone;
+    this.email = email;
+    this.profissao = profissao;
+    this.renda = renda;
+    this.endereco = endereco;
+    this.status = status;
+  }
 
   public String getNome() {
     return nome;
