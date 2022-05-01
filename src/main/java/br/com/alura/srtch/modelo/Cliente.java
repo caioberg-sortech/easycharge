@@ -1,6 +1,7 @@
 package br.com.alura.srtch.modelo;
 
 import br.com.alura.srtch.StatusCliente;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.opencsv.bean.CsvBindByName;
 import com.opencsv.bean.CsvBindByNames;
 import com.opencsv.bean.CsvIgnore;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "clientes")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cliente {
 
   @Id

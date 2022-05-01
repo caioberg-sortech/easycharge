@@ -1,12 +1,8 @@
 package br.com.alura.srtch.teste;
 
 import br.com.alura.srtch.modelo.Cliente;
-import br.com.alura.srtch.service.ClientesPorEstado;
-import br.com.alura.srtch.service.ClientesSuspensos;
-import br.com.alura.srtch.service.LeituraDados;
-
+import br.com.alura.srtch.service.*;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 public class Main {
@@ -17,17 +13,27 @@ public class Main {
     }
 
     String arquivo = args[0];
+    List<Cliente> clientes;
 
-    List<Cliente> clientes = new LeituraDados().lerArquivo(arquivo);
-
-
-    System.out.println("# Limites de dívidas dos clientes");
-    for (Cliente cliente : clientes) {
-      BigDecimal limiteDivida = cliente.getRenda().multiply(BigDecimal.valueOf(12));
-      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.\n", cliente.getNome(), limiteDivida);
+    if (arquivo.endsWith(".csv")) {
+      clientes = new ArquivoCSV().lerArquivo(arquivo);
+    } else if (arquivo.endsWith(".json")) {
+      clientes = new ArquivoJSON().lerArquivo(arquivo);
+    } else {
+      throw new IllegalArgumentException("Formato de arquivo inválido: " + arquivo);
     }
 
-   new ClientesSuspensos().rendaClientesSuspensos(clientes);
+
+      System.out.println("# Limites de dívidas dos clientes");
+    for (Cliente cliente : clientes) {
+      BigDecimal limiteDivida = cliente.getRenda().multiply(BigDecimal.valueOf(12));
+      System.out.printf("- o limite máximo de dívida para %s é de R$ %.2f.%n", cliente.getNome(), limiteDivida);
+    }
+
+    ClientesSuspensos suspensos = new ClientesSuspensos();
+
+    System.out.printf("%nHá %s clientes suspensos.%n", suspensos.nClientesSuspensos(clientes));
+    System.out.printf("A média de renda dos clientes suspensos é de R$ %.2f%n%n", suspensos.mediaRendaClientesSuspensos(clientes));
 
     ClientesPorEstado clientesPorEstado = new ClientesPorEstado();
     for (Cliente cliente : clientes) {
@@ -36,7 +42,7 @@ public class Main {
     System.out.println("# Clientes por estado");
     for (String estado : clientesPorEstado.keySet()) {
       List<Cliente> clientesDoEstado = clientesPorEstado.get(estado);
-      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).\n", estado, clientesDoEstado.size());
+      System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).%n", estado, clientesDoEstado.size());
     }
 
 

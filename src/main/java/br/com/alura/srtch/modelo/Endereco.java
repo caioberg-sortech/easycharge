@@ -1,37 +1,43 @@
 package br.com.alura.srtch.modelo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
 
+
+
+
 @Entity
 @Table(name = "enderecos")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CsvBindByName(required = true,format = "varchar(255)")
+    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String rua;
 
-    @CsvBindByName(required = true,format = "varchar(255)")
+    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String numero;
 
     @Column
     private String complemento;
 
-    @CsvBindByName(required = true,format = "varchar(255)")
+    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String bairro;
 
-    @CsvBindByName(required = true,format = "varchar(255)")
+    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String cidade;
 
-    @CsvBindByName(required = true,format = "varchar(255)")
+    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String estado;
 
