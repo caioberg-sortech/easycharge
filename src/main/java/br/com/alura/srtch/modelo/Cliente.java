@@ -15,11 +15,12 @@ import java.math.BigDecimal;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Cliente {
 
-  @Id
+
   @CsvBindByName
   @Column(nullable = false)
   private String nome;
 
+  @Id
   @CsvBindByName
   @Column(nullable = false)
   private String cpf;
@@ -40,7 +41,7 @@ public class Cliente {
   @Column(nullable = false)
   private BigDecimal renda;
 
-  @OneToOne
+  @OneToOne(fetch = FetchType.LAZY)
   @CsvRecurse
   private Endereco endereco;
 

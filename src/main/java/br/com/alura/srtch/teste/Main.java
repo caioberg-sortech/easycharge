@@ -45,7 +45,6 @@ public class Main {
       System.out.printf("- o estado %s tem %d cliente(s) cadastrado(s).%n", estado, clientesDoEstado.size());
     }
 
-
   }
 
 }
