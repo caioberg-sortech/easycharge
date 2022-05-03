@@ -1,51 +1,38 @@
 package br.com.alura.srtch.modelo;
 
-import br.com.alura.srtch.StatusCliente;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.opencsv.bean.CsvBindByName;
-import com.opencsv.bean.CsvBindByNames;
-import com.opencsv.bean.CsvIgnore;
-import com.opencsv.bean.CsvRecurse;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "clientes")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Cliente {
 
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(length=10)
+  private Long id;
 
-  @CsvBindByName
   @Column(nullable = false)
   private String nome;
 
-  @Id
-  @CsvBindByName
   @Column(nullable = false)
   private String cpf;
 
-  @CsvBindByName
   @Column(nullable = false)
   private String telefone;
 
-  @CsvBindByName
   @Column(nullable = false)
   private String email;
 
-  @CsvBindByName
   @Column(nullable = false)
   private String profissao;
 
-  @CsvBindByName(required = true)
-  @Column(nullable = false)
+  @Column(nullable = false, length = 10)
   private BigDecimal renda;
 
   @OneToOne(fetch = FetchType.LAZY)
-  @CsvRecurse
   private Endereco endereco;
 
-  @CsvBindByName
   @Enumerated(EnumType.STRING)
   private StatusCliente status;
 

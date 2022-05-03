@@ -10,7 +10,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "enderecos")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco {
 
 
@@ -18,26 +17,20 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String rua;
 
-    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String numero;
 
-    @Column
     private String complemento;
 
-    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String bairro;
 
-    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String cidade;
 
-    @CsvBindByName(required = true)
     @Column(nullable = false)
     private String estado;
 

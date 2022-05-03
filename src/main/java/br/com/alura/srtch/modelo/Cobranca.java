@@ -37,10 +37,10 @@ public class Cobranca {
     @Column(name = "data_promessa")
     private  LocalDate dataPromessa;
 
-    private short parcelas;
+    private Integer parcelas;
 
     @ManyToOne
-    @Column(nullable = false)
+    @JoinColumn(nullable = false)
     private Divida divida;
 
     public Long getId() {
@@ -115,11 +115,11 @@ public class Cobranca {
         this.dataPromessa = dataPromessa;
     }
 
-    public short getParcelas() {
+    public Integer getParcelas() {
         return parcelas;
     }
 
-    public void setParcelas(short parcelas) {
+    public void setParcelas(Integer parcelas) {
         this.parcelas = parcelas;
     }
 

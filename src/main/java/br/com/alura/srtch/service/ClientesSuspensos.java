@@ -1,6 +1,6 @@
 package br.com.alura.srtch.service;
 
-import br.com.alura.srtch.StatusCliente;
+import br.com.alura.srtch.modelo.StatusCliente;
 import br.com.alura.srtch.modelo.Cliente;
 import java.math.BigDecimal;
 import java.math.RoundingMode;

@@ -29,7 +29,7 @@ public class ClienteDao {
     }
 
     public List<Cliente> buscarporstatus(String status){
-        String jpql = "SELECT c FROM Cliente c WHERE c.status.nome = :status";
+        String jpql = "SELECT c FROM Cliente c WHERE c.status = :status";
         return em.createQuery(jpql, Cliente.class)
                 .setParameter("status", status)
                 .getResultList();

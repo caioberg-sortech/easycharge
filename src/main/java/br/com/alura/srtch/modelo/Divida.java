@@ -1,16 +1,17 @@
 package br.com.alura.srtch.modelo;
 
 
-import br.com.alura.srtch.StatusDivida;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "divida")
 public class Divida {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
@@ -28,9 +29,24 @@ public class Divida {
 
     private String descricaoDeQuitacao;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_cpf")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn( nullable = false)
     private Cliente cliente;
+
+    @OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
+    private final List<Cobranca> cobranca = new ArrayList<>();
+
+    public Divida(BigDecimal valor, LocalDate abertura, StatusDivida status, Cliente cliente) {
+        this.valor = valor;
+        this.abertura = abertura;
+        this.status = status;
+        this.cliente = cliente;
+    }
+
+    public Divida() {
+
+    }
+
 
     public Cliente getCliente() {
         return cliente;
