@@ -1,7 +1,5 @@
 package br.com.alura.srtch.modelo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.opencsv.bean.CsvBindByName;
 
 import javax.persistence.*;
 
