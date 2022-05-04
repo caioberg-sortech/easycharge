@@ -1,9 +1,10 @@
-package br.com.alura.srtch.modelo;
+package br.com.alura.srtch.model;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "cobranca")
 public class Cobranca {
 
 
