@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ClienteMapper {
 
-    public List<Cliente> TranformarClienteDTO(List<ClienteDTO> clientesDTO){
+    public List<Cliente> transformarClienteDTO(List<ClienteDTO> clientesDTO){
 
         List<Cliente> clientes = new ArrayList<>();
 

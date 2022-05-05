@@ -23,7 +23,7 @@ public class ArquivoJSON {
 
             clientesDTO = mapper.readValue(reader, new TypeReference<List<ClienteDTO>>() {});
 
-            clientes = new ClienteMapper().TranformarClienteDTO(clientesDTO);
+            clientes = new ClienteMapper().transformarClienteDTO(clientesDTO);
 
         } catch (IOException ex) {
             throw new IllegalStateException(ex);
