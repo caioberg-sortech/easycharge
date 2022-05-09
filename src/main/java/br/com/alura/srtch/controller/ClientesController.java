@@ -50,10 +50,9 @@ public class ClientesController {
         return "redirect:/listaClientes";
     }
 
-    @GetMapping("clienteFormulario/{id}")
-    public String clienteFormulario(@PathVariable Long id,ClienteDTO clienteDTO){
+    @GetMapping("clienteFormulario")
+    public String clienteFormulario(,ClienteDTO clienteDTO){
 
-        Cliente cliente = clienteRepository.getById(id);
 
 
 
