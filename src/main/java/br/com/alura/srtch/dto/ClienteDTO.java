@@ -1,35 +1,51 @@
 package br.com.alura.srtch.dto;
 
-import br.com.alura.srtch.model.StatusCliente;
 
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 public class ClienteDTO {
+
+    @NotBlank
     private String nome;
 
+    @NotBlank
     private String cpf;
 
+    @NotBlank
     private String telefone;
 
+    @NotBlank
     private String email;
 
+    @NotBlank
     private String rua;
 
+    @NotBlank
     private String numero;
 
+    @NotBlank
     private String complemento;
 
+    @NotBlank
     private String bairro;
 
+    @NotBlank
     private String cidade;
 
+    @NotBlank
     private String estado;
 
+    @NotBlank
     private String profissao;
 
+    @NotNull
     private BigDecimal renda;
 
-    private StatusCliente status;
+    @NotBlank
+    private String status;
 
     public String getNome() {
         return nome;
@@ -79,7 +95,7 @@ public class ClienteDTO {
         return renda;
     }
 
-    public StatusCliente getStatus() {
+    public String getStatus() {
         return status;
     }
 }
