@@ -44,10 +44,23 @@ public class ClienteMapper {
         return cliente;
     }
 
-//    public ClienteDTO transformarCliente(Cliente cliente){
-//        ClienteDTO clienteDTO;
-//
-//
-//        return clienteDTO;
-//    }
+    public ClienteDTO transformarCliente(Cliente c){
+        ClienteDTO clienteDTO = new ClienteDTO();
+
+        clienteDTO.setNome(c.getNome());
+        clienteDTO.setCpf(c.getCpf());
+        clienteDTO.setTelefone(c.getTelefone());
+        clienteDTO.setEmail(c.getEmail());
+        clienteDTO.setProfissao(c.getProfissao());
+        clienteDTO.setRenda(c.getRenda());
+        clienteDTO.setRua(c.getEndereco().getRua());
+        clienteDTO.setNumero(c.getEndereco().getNumero());
+        clienteDTO.setComplemento(c.getEndereco().getComplemento());
+        clienteDTO.setBairro(c.getEndereco().getBairro());
+        clienteDTO.setCidade(c.getEndereco().getCidade());
+        clienteDTO.setEstado(c.getEndereco().getEstado());
+        clienteDTO.setStatus(c.getStatus().getTexto());
+        clienteDTO.setId(c.getId());
+        return clienteDTO;
+    }
 }

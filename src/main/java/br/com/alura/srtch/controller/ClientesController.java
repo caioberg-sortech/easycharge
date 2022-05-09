@@ -51,10 +51,13 @@ public class ClientesController {
     }
 
     @GetMapping("clienteFormulario")
-    public String clienteFormulario(,ClienteDTO clienteDTO){
-
-
-
+    public String clienteFormulario(Model model, Long id){
+        ClienteDTO clienteDTO;
+        if(id >= 0){
+            Cliente cliente = clienteRepository.getById(id);
+            clienteDTO = new ClienteMapper().transformarCliente(cliente);
+            model.addAttribute("cliente", clienteDTO);
+        }
 
         return "clienteFormulario";
     }
@@ -65,10 +68,22 @@ public class ClientesController {
         if (result.hasErrors()){
             return "clienteFormulario";
         }
-
         Cliente cliente = new ClienteMapper().transformarClienteDTO(clienteDTO);
         clienteRepository.save(cliente);
         return "redirect:/listaClientes";
     }
 
+//    @GetMapping("/alterarClienteForm/{id}")
+//    public String alterarClienteForm(@PathVariable Long id, Model model){
+//
+//        Cliente cliente = clienteRepository.getById(id);
+//        model.addAttribute("cliente", cliente);
+//
+//        return "alterarClienteForm";
+//    }
+//
+//    @PostMapping("alterarCliente")
+//    public String alterarCliente(){
+//
+//    }
 }
