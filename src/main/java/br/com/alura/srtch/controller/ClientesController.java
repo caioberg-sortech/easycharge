@@ -1,17 +1,23 @@
 package br.com.alura.srtch.controller;
 
+import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-public class ListaClientesController {
+public class ClientesController {
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -31,6 +37,7 @@ public class ListaClientesController {
         return "redirect:/listaClientes";
     }
 
+    @Transactional
     @GetMapping("/alterarStatus/{id}")
     public String alterarStatus( @PathVariable Long id){
         Cliente cliente = clienteRepository.getById(id);
@@ -43,5 +50,21 @@ public class ListaClientesController {
         return "redirect:/listaClientes";
     }
 
+    @GetMapping("clienteFormulario")
+    public String clienteFormulario(ClienteDTO clienteDTO){
+        return "clienteFormulario";
+    }
+
+    @PostMapping("novoCliente")
+    public String novoCliente(@Valid ClienteDTO clienteDTO, BindingResult result){
+
+        if (result.hasErrors()){
+            return "clienteFormulario";
+        }
+
+        Cliente cliente = new ClienteMapper().transformarClienteDTO(clienteDTO);
+        clienteRepository.saveAndFlush(cliente);
+        return "redirect:/listaClientes";
+    }
 
 }

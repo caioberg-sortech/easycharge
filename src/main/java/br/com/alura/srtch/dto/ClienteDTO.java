@@ -8,43 +8,42 @@ import java.math.BigDecimal;
 
 public class ClienteDTO {
 
-    @NotBlank
+
     private String nome;
 
-    @NotBlank
+
     private String cpf;
 
-    @NotBlank
+
     private String telefone;
 
-    @NotBlank
+
     private String email;
 
-    @NotBlank
+
     private String rua;
 
-    @NotBlank
+
     private String numero;
 
-    @NotBlank
     private String complemento;
 
-    @NotBlank
+
     private String bairro;
 
-    @NotBlank
+
     private String cidade;
 
-    @NotBlank
+
     private String estado;
 
-    @NotBlank
+
     private String profissao;
 
-    @NotNull
+
     private BigDecimal renda;
 
-    @NotBlank
+
     private String status;
 
     public String getNome() {
@@ -97,5 +96,57 @@ public class ClienteDTO {
 
     public String getStatus() {
         return status;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setRua(String rua) {
+        this.rua = rua;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public void setRenda(BigDecimal renda) {
+        this.renda = renda;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
