@@ -43,4 +43,11 @@ public class ClienteMapper {
 
         return cliente;
     }
+
+//    public ClienteDTO transformarCliente(Cliente cliente){
+//        ClienteDTO clienteDTO;
+//
+//
+//        return clienteDTO;
+//    }
 }

@@ -40,6 +40,7 @@
                         <th scope="col">Local: </th>
                         <th scope="col">Alterar Status: </th>
                         <th scope="col">Remover: </th>
+                        <th scope="col">Editar: </th>
                     </tr>
                     </thead>
                     <tbody>
@@ -60,6 +61,9 @@
                         </td>
                         <td>
                             <a class="btn btn-warning" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" th:href="@/clienteFormulario/{id}(id=${cliente.id})}" role="button">Alterar</a>
                         </td>
                     </tr>
                     </tbody>

@@ -5,12 +5,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class EasychargeApplication {
+public class EasyChargeApplication {
 
 	public static void main(String[] args) {
 
 
-		SpringApplication.run(EasychargeApplication.class, args);
+		SpringApplication.run(EasyChargeApplication.class, args);
 	}
 
 }
