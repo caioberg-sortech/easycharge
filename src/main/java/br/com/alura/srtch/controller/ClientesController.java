@@ -63,7 +63,7 @@ public class ClientesController {
         }
 
         Cliente cliente = new ClienteMapper().transformarClienteDTO(clienteDTO);
-        clienteRepository.saveAndFlush(cliente);
+        clienteRepository.save(cliente);
         return "redirect:/listaClientes";
     }
 
