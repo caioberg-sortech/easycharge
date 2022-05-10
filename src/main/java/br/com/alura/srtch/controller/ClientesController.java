@@ -73,17 +73,24 @@ public class ClientesController {
         return "redirect:/listaClientes";
     }
 
-//    @GetMapping("/alterarClienteForm/{id}")
-//    public String alterarClienteForm(@PathVariable Long id, Model model){
-//
-//        Cliente cliente = clienteRepository.getById(id);
-//        model.addAttribute("cliente", cliente);
-//
-//        return "alterarClienteForm";
-//    }
-//
-//    @PostMapping("alterarCliente")
-//    public String alterarCliente(){
-//
-//    }
+    @GetMapping("/alterarClienteForm/{id}")
+    public String alterarClienteForm(@PathVariable Long id, Model model){
+
+        Cliente cliente = clienteRepository.getById(id);
+        model.addAttribute("cliente", cliente);
+        return "alterarClienteForm";
+    }
+
+    @Transactional
+    @PostMapping("alterarCliente")
+    public String alterarCliente(@Valid ClienteDTO clienteDTO, BindingResult result){
+        if (result.hasErrors()){
+            return "cliente/formulario";
+        }
+        Cliente cliente = clienteRepository.getById(clienteDTO.getId());
+        new ClienteMapper().atualizarCliente(cliente,clienteDTO);
+        clienteRepository.save(cliente);
+        return "redirect:/listaClientes";
+    }
+
 }

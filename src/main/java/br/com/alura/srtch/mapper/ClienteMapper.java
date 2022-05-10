@@ -63,4 +63,18 @@ public class ClienteMapper {
         clienteDTO.setId(c.getId());
         return clienteDTO;
     }
+
+    public Cliente atualizarCliente(Cliente cliente, ClienteDTO clienteDTO){
+
+        cliente.setCpf(clienteDTO.getCpf());
+        cliente.setEmail(clienteDTO.getEmail());
+        cliente.setNome(clienteDTO.getNome());
+        cliente.setProfissao(clienteDTO.getProfissao());
+        cliente.setRenda(clienteDTO.getRenda());
+        cliente.setTelefone(clienteDTO.getTelefone());
+        cliente.setStatus(StatusCliente.valueOf(clienteDTO.getStatus()));
+        cliente.setEndereco(new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getComplemento(), clienteDTO.getBairro(), clienteDTO.getCidade(), clienteDTO.getEstado()));
+        return cliente;
+    }
 }
+

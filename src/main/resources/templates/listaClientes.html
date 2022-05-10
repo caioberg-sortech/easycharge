@@ -60,10 +60,10 @@
                             </a>
                         </td>
                         <td>
-                            <a class="btn btn-warning" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>
+                            <a class="btn btn-warning" th:href="@{/alterarClienteForm/{id}(id=${cliente.id})}" role="button">Alterar</a>
                         </td>
                         <td>
-                            <a class="btn btn-warning" th:href="@{/clienteFormulario(id=${cliente.id})}" role="button">Alterar</a>
+                            <a class="btn btn-danger" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>
                         </td>
                     </tr>
                     </tbody>
