@@ -33,42 +33,42 @@
             <div class="form-group">
                 <label for="nome">Cliente</label>
                 <input th:name="nome" id="nome" type="text" th:value="${cliente.nome}" class="form-control" placeholder="nome do cliente" required>
-                <div th:errors="*{nome}">
+                <div th:errors="*{cliente.nome}">
                     Erros do nome do cliente
                 </div>
             </div>
             <div class="form-group">
                 <label for="cpf">CPF</label>
                 <input th:name="cpf" id="cpf" th:value="${cliente.cpf}" class="form-control" placeholder="___.___.___-__" required>
-                <div th:errors="*{cpf}">
+                <div th:errors="*{cliente.cpf}">
                     Erros do cpf do cliente
                 </div>
             </div>
             <div class="form-group">
                 <label for="telefone">Telefone</label>
                 <input type="tel" th:name="telefone" id="telefone" th:value="${cliente.telefone}" class="form-control" placeholder="(xx) xxxxx-xxxx" required>
-                <div th:errors="*{telefone}">
+                <div th:errors="*{cliente.telefone}">
                     Erros do telefone do cliente
                 </div>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" th:name="email" id="email" th:value="${cliente.email}" class="form-control" placeholder="fulano@gmail.com" required>
-                <div th:errors="*{email}">
+                <div th:errors="*{cliente.email}">
                     Erros do email do cliente
                 </div>
             </div>
             <div class="form-group">
                 <label for="profissao">Profissão</label>
                 <input th:name="profissao" id="profissao" th:value="${cliente.profissao}" class="form-control" placeholder="profissão do cliente" required>
-                <div th:errors="*{profissao}">
+                <div th:errors="*{cliente.profissao}">
                     Erros da profissao do cliente
                 </div>
             </div>
             <div class="form-group">
                 <label for="renda">Renda</label>
                 <input th:name="renda" id="renda" th:value="${cliente.renda}" class="form-control" placeholder="000.00" required>
-                <div th:errors="*{renda}">
+                <div th:errors="*{cliente.renda}">
                     Erros da renda do cliente
                 </div>
             </div>
@@ -78,7 +78,7 @@
                     <option value="SUSPENSO">SUSPENSO</option>
                     <option value="ATIVO">ATIVO</option>
                 </select>
-                <div th:errors="*{status}">
+                <div th:errors="*{cliente.status}">
                     Erros do status do cliente
                 </div>
             </div>
@@ -115,15 +115,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="cliente.endereco.estado">Estado</label>
-                <input th:name="estado" id="estado" th:value="${cliente.endereco.estado}" class="form-control" placeholder="DF" required>
-                <div th:errors="*{cliente.endereco.estado}">
-                    Erros do estado do cliente
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="estado" class="form-label fs-5">Estado</label>
-                <select th:field="*{estado}" th:errorclass="is-invalid" id="estado" class="form-select">
+                <select th:field="*{cliente.endereco.estado}" th:errorclass="is-invalid" id="estado" class="form-select">
                     <option disabled value="">Selecione...</option>
                     <option selected th:text="${cliente.endereco.estado}" th:value="${cliente.endereco.estado}"></option>
                     <option value="AC">AC</option>
@@ -154,7 +147,7 @@
                     <option value="SE">SE</option>
                     <option value="TO">TO</option>
                 </select>
-                <div class="invalid-feedback" th:errors="*{estado}">
+                <div class="invalid-feedback" th:errors="*{cliente.endereco.estado}">
                     Erros do estado do cliente
                 </div>
             </div>
