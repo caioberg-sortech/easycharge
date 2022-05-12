@@ -50,15 +50,13 @@ public class ClientesController {
         return "redirect:/listaClientes";
     }
 
-    @GetMapping("clienteFormulario/{id}")
-    public String clienteFormulario(Model model,@PathVariable Long id,ClienteDTO clienteDTO){
+    @GetMapping("clienteFormulario")
+    public String clienteFormulario(Model model, Long id, ClienteDTO clienteDTO){
 
-        if(id >= 0){
+        if(id !=null){
             Cliente cliente = clienteRepository.getById(id);
             clienteDTO = new ClienteMapper().transformarCliente(cliente);
             model.addAttribute("clienteDTO", clienteDTO);
-        } else{
-            clienteDTO.setId(null);
         }
 
         return "clienteFormulario";

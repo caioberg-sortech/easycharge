@@ -15,14 +15,14 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link active" aria-current="page" href="#">Lista</a>
-                            <a class="nav-link" th:href="@{/clienteFormulario/{id}(id=-1)}">Cadastrar</a>
+                            <a class="nav-link" th:href="@{/clienteFormulario}">Cadastrar</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div class="container-fluid mt-5 pt-4 pb-4 bg-secondary">
+        <div class="container-fluid pt-4 pb-4 bg-secondary">
             <div class="jumbotron jumbotron-fluid pt-4 pb-0 bg-light">
                 <div class="container text-center mt-2 ">
                     <h1 class="display-4">Lista Clientes</h1>
@@ -61,7 +61,7 @@
                                </a>
                            </td>
                            <td>
-                               <a class="btn btn-warning" th:href="@{/clienteFormulario/{id}(id=${cliente.id})}" role="button">Alterar</a>
+                               <a class="btn btn-warning" th:href="@{/clienteFormulario(id=${cliente.id})}" role="button">Alterar</a>
                            </td>
                            <td>
                                <a class="btn btn-danger" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>

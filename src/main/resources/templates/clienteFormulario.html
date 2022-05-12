@@ -15,7 +15,7 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="/listaClientes">Lista</a>
-                    <a class="nav-link active" aria-current="page" href="#">Cadastrar</a>
+                    <a th:classappend="${clienteDTO.id} == null ? 'active' : '' " class="nav-link" aria-current="page" href="#">Cadastrar</a>
                 </div>
             </div>
         </div>

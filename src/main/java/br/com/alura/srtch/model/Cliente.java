@@ -30,7 +30,7 @@ public class Cliente {
   @Column(nullable = false, length = 10)
   private BigDecimal renda;
 
-  @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToOne(cascade = CascadeType.ALL)
   private Endereco endereco;
 
   @Enumerated(EnumType.STRING)
