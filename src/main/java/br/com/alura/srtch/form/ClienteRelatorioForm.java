@@ -48,7 +48,4 @@ public class ClienteRelatorioForm {
         return status;
     }
 
-    public static List<ClienteRelatorioForm> converter(List<Cliente> clientes){
-        return clientes.stream().map(ClienteRelatorioForm::new).collect(Collectors.toList());
-    }
 }

@@ -1,63 +1,50 @@
-package br.com.alura.srtch.model;
+package br.com.alura.srtch.form;
 
+
+import br.com.alura.srtch.model.Divida;
+import br.com.alura.srtch.model.StatusDivida;
+import br.com.alura.srtch.repository.ClienteRepository;
+import br.com.alura.srtch.repository.DividaRepository;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name = "divida")
-public class Divida {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Long id;
 
-    @Column(nullable = false)
+public class DividaForm {
+
+    @NotNull
+    private Long cliente_id;
+
+    @Positive
+    @NotNull
     private BigDecimal valor;
 
-    @Column(nullable = false)
+    @PastOrPresent
+    @NotNull
     private LocalDate abertura;
 
+    @PastOrPresent
     private LocalDate quitacao;
 
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
+    @NotNull
     private StatusDivida status = StatusDivida.ABERTA;
 
+    @Length(max = 255)
     private String descricaoDeQuitacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn( nullable = false)
-    private Cliente cliente;
-
-    @OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
-    private final List<Cobranca> cobranca = new ArrayList<>();
-
-    public Divida(BigDecimal valor, LocalDate abertura, StatusDivida status, Cliente cliente) {
-        this.valor = valor;
-        this.abertura = abertura;
-        this.status = status;
-        this.cliente = cliente;
+    public Long getCliente_id() {
+        return cliente_id;
     }
 
-    public Divida() {
-
-    }
-
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setCliente_id(Long cliente_id) {
+        this.cliente_id = cliente_id;
     }
 
     public BigDecimal getValor() {
@@ -100,11 +87,4 @@ public class Divida {
         this.descricaoDeQuitacao = descricaoDeQuitacao;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Long getClienteId(){
-        return this.cliente.getId();
-    }
 }

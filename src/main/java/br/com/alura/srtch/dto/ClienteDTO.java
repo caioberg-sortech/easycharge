@@ -2,10 +2,16 @@ package br.com.alura.srtch.dto;
 
 
 
-import javax.validation.constraints.Min;
+import br.com.alura.srtch.form.ClienteRelatorioForm;
+import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.model.StatusCliente;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClienteDTO {
 
@@ -52,11 +58,31 @@ public class ClienteDTO {
     private String profissao;
 
     @NotNull
-    @Min(1)
+    @Positive
     private BigDecimal renda;
 
     @NotBlank
-    private String status;
+    private StatusCliente status;
+
+    public ClienteDTO() {
+    }
+
+    public ClienteDTO(Cliente cliente){
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+        this.cpf = cliente.getCpf();
+        this.telefone = cliente.getTelefone();
+        this.email = cliente.getEmail();
+        this.rua = cliente.getEndereco().getRua();
+        this.numero = cliente.getEndereco().getNumero();
+        this.complemento = cliente.getEndereco().getComplemento();
+        this.bairro = cliente.getEndereco().getBairro();
+        this.cidade = cliente.getEndereco().getCidade();
+        this.estado = cliente.getEndereco().getEstado();
+        this.profissao = cliente.getProfissao();
+        this.renda = cliente.getRenda();
+        this.status = cliente.getStatus();
+    }
 
     public String getNome() {
         return nome;
@@ -106,7 +132,7 @@ public class ClienteDTO {
         return renda;
     }
 
-    public String getStatus() {
+    public StatusCliente getStatus() {
         return status;
     }
 
@@ -158,7 +184,11 @@ public class ClienteDTO {
         this.renda = renda;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(StatusCliente status) {
         this.status = status;
+    }
+
+    public static List<ClienteDTO> converter(List<Cliente> clientes){
+        return clientes.stream().map(ClienteDTO::new).collect(Collectors.toList());
     }
 }

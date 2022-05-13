@@ -1,7 +1,9 @@
 package br.com.alura.srtch.mapper;
 
 import br.com.alura.srtch.dto.ClienteDTO;
+import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.Endereco;
 import br.com.alura.srtch.model.StatusCliente;
 
@@ -59,7 +61,7 @@ public class ClienteMapper {
         clienteDTO.setBairro(c.getEndereco().getBairro());
         clienteDTO.setCidade(c.getEndereco().getCidade());
         clienteDTO.setEstado(c.getEndereco().getEstado());
-        clienteDTO.setStatus(c.getStatus().getTexto());
+        clienteDTO.setStatus(c.getStatus());
         clienteDTO.setId(c.getId());
         return clienteDTO;
     }
@@ -72,9 +74,17 @@ public class ClienteMapper {
         cliente.setProfissao(clienteDTO.getProfissao());
         cliente.setRenda(clienteDTO.getRenda());
         cliente.setTelefone(clienteDTO.getTelefone());
-        cliente.setStatus(StatusCliente.valueOf(clienteDTO.getStatus()));
+        cliente.setStatus(clienteDTO.getStatus());
         cliente.setEndereco(new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getComplemento(), clienteDTO.getBairro(), clienteDTO.getCidade(), clienteDTO.getEstado()));
         return cliente;
     }
+
+    public Cliente cadastrar(ClienteForm form) {
+        Endereco endereco;
+        endereco = new Endereco(form.getRua(), form.getNumero(), form.getComplemento(), form.getBairro(), form.getCidade(), form.getEstado());
+
+        return new Cliente(form.getNome(), form.getCpf(), form.getTelefone(), form.getEmail(), form.getProfissao(), form.getRenda(), endereco, form.getStatus() );
+    }
+
 }
 
