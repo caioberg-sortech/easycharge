@@ -5,6 +5,6 @@ import java.math.BigDecimal;
 
 public interface ClienteRelatorioProjection {
     String getNome();
-    BigDecimal getTotalDivida();
+    BigDecimal getTotalDividas();
     Integer getCobrancas();
 }
