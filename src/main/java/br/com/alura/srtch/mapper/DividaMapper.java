@@ -10,7 +10,7 @@ public class DividaMapper {
     public Divida cadastrar(DividaForm dividaForm, ClienteRepository clienteRepository){
         Cliente cliente = clienteRepository.getById(dividaForm.getCliente_id());
 
-        Divida divida = new Divida(dividaForm.getValor(),dividaForm.getAbertura(),dividaForm.getStatus(),cliente);
+        Divida divida = new Divida(dividaForm.getValor(),dividaForm.getAbertura(),dividaForm.getStatus(),dividaForm.getQuitacao(),dividaForm.getDescricaoDeQuitacao(),cliente);
 
         return divida;
     }

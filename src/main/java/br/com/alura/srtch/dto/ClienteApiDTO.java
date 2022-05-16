@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class ClienteApiDTO {
 
-
     private String nome;
     private String cpf;
     private String telefone;
@@ -25,6 +24,7 @@ public class ClienteApiDTO {
         this.status = cliente.getStatus();
         this.telefone = cliente.getTelefone();
     }
+
     public String getNome() {
         return nome;
     }

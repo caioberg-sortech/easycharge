@@ -1,20 +1,15 @@
 package br.com.alura.srtch.form;
 
 
-import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
-import br.com.alura.srtch.repository.ClienteRepository;
-import br.com.alura.srtch.repository.DividaRepository;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 
 
 public class DividaForm {
@@ -51,9 +46,7 @@ public class DividaForm {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+    public void setValor(BigDecimal valor) {this.valor = valor;}
 
     public LocalDate getAbertura() {
         return abertura;

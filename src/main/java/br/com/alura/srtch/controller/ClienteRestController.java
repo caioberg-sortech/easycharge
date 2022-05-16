@@ -20,14 +20,16 @@ import java.util.List;
 @RequestMapping("/api/clientes")
 public class ClienteRestController {
 
-    @Autowired
-    ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+
+    public ClienteRestController(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @GetMapping
     public List<ClienteApiDTO> lista(){
         List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "nome").and(Sort.by(Sort.Direction.ASC,"status")));
         return ClienteApiDTO.converter(clientes);
-
     }
 
     @PostMapping
@@ -39,9 +41,9 @@ public class ClienteRestController {
         return ResponseEntity.created(uri).body(new ClienteApiDTO(cliente));
     }
 
-    @GetMapping("/report")
-    public List<ClienteRelatorio> relatorio(){
-
-    }
+//    @GetMapping("/report")
+//    public List<ClienteRelatorio> relatorio(){
+//
+//    }
 
 }

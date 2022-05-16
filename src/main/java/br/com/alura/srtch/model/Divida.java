@@ -29,24 +29,25 @@ public class Divida {
 
     private String descricaoDeQuitacao;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn( nullable = false)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "divida", cascade = CascadeType.ALL)
     private final List<Cobranca> cobranca = new ArrayList<>();
 
-    public Divida(BigDecimal valor, LocalDate abertura, StatusDivida status, Cliente cliente) {
+    public Divida(BigDecimal valor, LocalDate abertura, StatusDivida status, LocalDate quitacao, String descricaoDeQuitacao , Cliente cliente) {
         this.valor = valor;
         this.abertura = abertura;
         this.status = status;
         this.cliente = cliente;
+        this.quitacao = quitacao;
+        this.descricaoDeQuitacao = descricaoDeQuitacao;
     }
 
     public Divida() {
 
     }
-
 
     public Cliente getCliente() {
         return cliente;
