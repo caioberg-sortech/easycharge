@@ -7,6 +7,9 @@ import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +30,13 @@ public class ClienteRestController {
     }
 
     @GetMapping
-    public List<ClienteApiDTO> lista(){
-        List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "nome").and(Sort.by(Sort.Direction.ASC,"status")));
-        return ClienteApiDTO.converter(clientes);
+    public Page<ClienteApiDTO> lista(Integer page){
+        if( page == null){
+            page = 0;
+        }
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "nome").and(Sort.by(Sort.Direction.ASC,"status")));
+
+        return clienteRepository.findAll(pageable).map(ClienteApiDTO::new);
     }
 
     @PostMapping
