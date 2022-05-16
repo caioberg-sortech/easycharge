@@ -5,14 +5,16 @@ import br.com.alura.srtch.dto.ClienteDetalhamentoDTO;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
-import br.com.alura.srtch.projections.ClienteRelatorioProjection;
+import br.com.alura.srtch.projection.ClienteRelatorioProjection;
 import br.com.alura.srtch.repository.ClienteRepository;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -37,6 +39,8 @@ public class ClienteRestController {
     }
 
     @PostMapping
+    @CacheEvict(value = "relatorioCliente", allEntries = true)
+    @Transactional
     public ResponseEntity<ClienteApiDTO> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder){
         Cliente cliente = new ClienteMapper().cadastrar(form);
         clienteRepository.save(cliente);
@@ -45,7 +49,7 @@ public class ClienteRestController {
         return ResponseEntity.created(uri).body(new ClienteApiDTO(cliente));
     }
 
-    @GetMapping("/relatorio")
+    @GetMapping("/report")
     @Cacheable(value = "relatorioCliente")
    public List<ClienteRelatorioProjection> relatorio(){
         return clienteRepository.findTotalDividasCobrancasPorNome();

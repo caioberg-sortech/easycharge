@@ -1,4 +1,4 @@
-package br.com.alura.srtch.validacao;
+package br.com.alura.srtch.config.validation;
 
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;

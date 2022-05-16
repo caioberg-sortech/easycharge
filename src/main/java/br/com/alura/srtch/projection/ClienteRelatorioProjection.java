@@ -1,4 +1,4 @@
-package br.com.alura.srtch.projections;
+package br.com.alura.srtch.projection;
 
 
 import java.math.BigDecimal;

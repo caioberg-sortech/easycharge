@@ -2,7 +2,7 @@ package br.com.alura.srtch.repository;
 
 
 import br.com.alura.srtch.model.Cliente;
-import br.com.alura.srtch.projections.ClienteRelatorioProjection;
+import br.com.alura.srtch.projection.ClienteRelatorioProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
