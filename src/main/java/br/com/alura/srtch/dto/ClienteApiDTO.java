@@ -2,6 +2,7 @@ package br.com.alura.srtch.dto;
 
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
+import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -73,4 +74,7 @@ public class ClienteApiDTO {
         this.status = status;
     }
 
+    public static Page<ClienteApiDTO> converter(Page<Cliente> clientes){
+        return clientes.map(ClienteApiDTO::new);
+    }
 }
