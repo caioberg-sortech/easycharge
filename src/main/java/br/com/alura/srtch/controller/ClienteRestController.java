@@ -1,12 +1,11 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteApiDTO;
-import br.com.alura.srtch.dto.ClienteRelatorio;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
+import br.com.alura.srtch.projections.ClienteRelatorioProjection;
 import br.com.alura.srtch.repository.ClienteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +33,7 @@ public class ClienteRestController {
         if( page == null){
             page = 0;
         }
-        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "nome").and(Sort.by(Sort.Direction.ASC,"status")));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC,"nome")));
 
         return clienteRepository.findAll(pageable).map(ClienteApiDTO::new);
     }
@@ -48,9 +47,9 @@ public class ClienteRestController {
         return ResponseEntity.created(uri).body(new ClienteApiDTO(cliente));
     }
 
-//    @GetMapping("/report")
-//    public List<ClienteRelatorio> relatorio(){
-//
-//    }
+    @GetMapping("/relatorio")
+   public List<ClienteRelatorioProjection> relatorio(){
+        return clienteRepository.findTotalDividasCobrancasPorNome();
+    }
 
 }

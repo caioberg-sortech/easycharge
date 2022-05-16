@@ -2,10 +2,8 @@ package br.com.alura.srtch.dto;
 
 
 
-import br.com.alura.srtch.form.ClienteRelatorioForm;
 import br.com.alura.srtch.model.Cliente;
 import br.com.alura.srtch.model.StatusCliente;
-
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
