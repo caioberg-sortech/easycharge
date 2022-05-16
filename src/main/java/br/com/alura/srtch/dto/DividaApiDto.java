@@ -2,11 +2,6 @@ package br.com.alura.srtch.dto;
 
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
-import org.hibernate.validator.constraints.Length;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 

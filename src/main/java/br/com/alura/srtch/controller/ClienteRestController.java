@@ -1,6 +1,7 @@
 package br.com.alura.srtch.controller;
 
 import br.com.alura.srtch.dto.ClienteApiDTO;
+import br.com.alura.srtch.dto.ClienteDetalhamentoDTO;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
@@ -50,6 +51,12 @@ public class ClienteRestController {
     @GetMapping("/relatorio")
    public List<ClienteRelatorioProjection> relatorio(){
         return clienteRepository.findTotalDividasCobrancasPorNome();
+    }
+
+    @GetMapping("/{id}")
+    public ClienteDetalhamentoDTO detalhamentoCliente(@PathVariable Long id){
+        Cliente cliente = clienteRepository.getById(id);
+        return new ClienteDetalhamentoDTO(cliente);
     }
 
 }

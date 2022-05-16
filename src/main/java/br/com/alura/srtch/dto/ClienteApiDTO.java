@@ -73,7 +73,4 @@ public class ClienteApiDTO {
         this.status = status;
     }
 
-    public static List<ClienteApiDTO> converter(List<Cliente> clientes){
-        return clientes.stream().map(ClienteApiDTO::new).collect(Collectors.toList());
-    }
 }
