@@ -6,11 +6,13 @@ import br.com.alura.srtch.mapper.DividaMapper;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.DividaRepository;
+import br.com.alura.srtch.validacao.DividaValidacao;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.net.URI;
 
 @RestController
@@ -27,7 +29,10 @@ public class DividaRestController {
 
     @PostMapping
     public ResponseEntity<DividaApiDto> cadastrar(@RequestBody @Valid DividaForm dividaForm, UriComponentsBuilder uriBuilder){
-        if(!clienteRepository.existsById(dividaForm.getCliente_id())){
+        Long clienteId = dividaForm.getCliente_id();
+        if(!clienteRepository.existsById(clienteId) ){
+            return ResponseEntity.badRequest().build();
+        } else  if(new DividaValidacao().validacaoValorDivida(clienteRepository,dividaRepository,clienteId, dividaForm.getValor())){
             return ResponseEntity.badRequest().build();
         }
 
