@@ -59,7 +59,7 @@ public class ClienteDTO {
     @Positive
     private BigDecimal renda;
 
-    @NotBlank
+    @NotNull
     private StatusCliente status;
 
     public ClienteDTO() {

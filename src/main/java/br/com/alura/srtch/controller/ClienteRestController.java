@@ -23,7 +23,6 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clientes")
 public class ClienteRestController {
 
     private final ClienteRepository clienteRepository;
@@ -32,13 +31,13 @@ public class ClienteRestController {
         this.clienteRepository = clienteRepository;
     }
 
-    @GetMapping
+    @GetMapping("/api/clientes")
     public Page<ClienteApiDTO> lista(@PageableDefault(size = 5, page = 0, sort = {"nome", "status"}, direction = Sort.Direction.ASC) Pageable paginacao){
         Page<Cliente> clientes = clienteRepository.findAll(paginacao);
         return  ClienteApiDTO.converter(clientes);
     }
 
-    @PostMapping
+    @PostMapping("/api/clientes")
     @CacheEvict(value = "relatorioCliente", allEntries = true)
     @Transactional
     public ResponseEntity<ClienteApiDTO> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder){
@@ -49,16 +48,21 @@ public class ClienteRestController {
         return ResponseEntity.created(uri).body(new ClienteApiDTO(cliente));
     }
 
-    @GetMapping("/report")
+    @GetMapping("/api/clientes/report")
     @Cacheable(value = "relatorioCliente")
    public List<ClienteRelatorioProjection> relatorio(){
-        return clienteRepository.findTotalDividasCobrancasPorNome();
-    }
+        return clienteRepository.findTotalDividasCobrancasPorNome();}
 
     @GetMapping("/{id}")
     public ClienteDetalhamentoDTO detalhamentoCliente(@PathVariable Long id){
         Cliente cliente = clienteRepository.getById(id);
         return new ClienteDetalhamentoDTO(cliente);
+    }
+
+    @GetMapping("/api/aW52YWxpZGEgcmVsYXTDs3JpbyBkZSBjbGllbnRlcw")
+    @CacheEvict(value = "relatorioCliente", allEntries = true)
+    public ResponseEntity<?> invalidacaoCache(){
+        return ResponseEntity.badRequest().build();
     }
 
 }
