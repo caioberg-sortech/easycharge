@@ -5,7 +5,9 @@ import br.com.alura.srtch.dto.CobrancaApiDto;
 import br.com.alura.srtch.dto.DividaApiDto;
 import br.com.alura.srtch.form.CobrancaForm;
 import br.com.alura.srtch.form.DividaForm;
+import br.com.alura.srtch.mapper.CobrancaMapper;
 import br.com.alura.srtch.mapper.DividaMapper;
+import br.com.alura.srtch.model.Cobranca;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
 import br.com.alura.srtch.repository.CobrancasRepository;
@@ -41,12 +43,15 @@ public class CobrancasRestController {
     @CacheEvict(value = "relatorioCliente", allEntries = true)
     @Transactional
     public ResponseEntity<CobrancaApiDto> cadastrar(@RequestBody @Valid CobrancaForm cobrancaForm, UriComponentsBuilder uriBuilder){
-        Long clienteId = cobrancaForm.getDividaId();
-        if(!dividaRepository.existsById(clienteId) ){
+        Long dividaId = cobrancaForm.getDividaId();
+        if(!dividaRepository.existsById(dividaId) ){
             return ResponseEntity.badRequest().build();
         }
 
-        URI uri = uriBuilder.path("/api/cobrancas/{id}").buildAndExpand(divida.getId()).toUri();
+        Cobranca cobranca = new CobrancaMapper().trnsformaCobrancaForm(cobrancaForm,dividaRepository);
+        cobrancasRepository.save(cobranca);
+
+        URI uri = uriBuilder.path("/api/cobrancas/{id}").buildAndExpand(cobranca.getId()).toUri();
         return ResponseEntity.created(uri).body(new DividaApiDto(divida));
     }
 }

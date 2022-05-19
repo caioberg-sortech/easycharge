@@ -45,6 +45,21 @@ public class Cobranca {
     @JoinColumn(nullable = false)
     private Divida divida;
 
+    public Cobranca() {}
+
+    public Cobranca(LocalDate dataCobranca, String contato, String agente, TipoAgente tipoAgente, String comentario, String acordo, TipoAcordo tipoAcordo, LocalDate dataPromessa, Integer parcelas, Divida divida) {
+        this.dataCobranca = dataCobranca;
+        this.contato = contato;
+        this.agente = agente;
+        this.tipoAgente = tipoAgente;
+        this.comentario = comentario;
+        this.acordo = acordo;
+        this.tipoAcordo = tipoAcordo;
+        this.dataPromessa = dataPromessa;
+        this.parcelas = parcelas;
+        this.divida = divida;
+    }
+
     public Long getId() {
         return id;
     }

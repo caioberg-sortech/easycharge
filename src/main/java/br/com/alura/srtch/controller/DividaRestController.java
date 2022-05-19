@@ -39,7 +39,7 @@ public class DividaRestController {
             return ResponseEntity.badRequest().build();
         }
 
-        Divida divida = new DividaMapper().cadastrar(dividaForm, clienteRepository);
+        Divida divida = new DividaMapper().transformaDividaForm(dividaForm, clienteRepository);
         dividaRepository.save(divida);
 
         URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();

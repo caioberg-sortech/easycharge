@@ -1,27 +1,30 @@
 package br.com.alura.srtch.form;
 
-import br.com.alura.srtch.model.Divida;
+
 import br.com.alura.srtch.model.TipoAcordo;
 import br.com.alura.srtch.model.TipoAgente;
+import org.hibernate.validator.constraints.Length;
 
 
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 public class CobrancaForm {
 
-
+    @NotNull
+    @FutureOrPresent
     private LocalDate dataCobranca;
 
-
+    @NotNull
     private String contato;
 
-
+    @NotNull
     private String agente;
 
-
+    @NotNull
     private TipoAgente tipoAgente;
 
-
+    @Length(max = 500, min = 1)
     private String comentario;
 
 
@@ -30,12 +33,14 @@ public class CobrancaForm {
 
     private TipoAcordo tipoAcordo;
 
-
+    @Future
     private  LocalDate dataPromessa;
 
+    @Min(1)
+    @Max(12)
     private Integer parcelas;
 
-
+    @NotNull
     private Long dividaId;
 
     public LocalDate getDataCobranca() {
