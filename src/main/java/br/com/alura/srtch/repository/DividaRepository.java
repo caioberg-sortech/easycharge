@@ -11,4 +11,5 @@ public interface DividaRepository extends JpaRepository<Divida, Long> {
 
     @Query("SELECT SUM(d.valor) FROM Divida d WHERE d.cliente = :clienteId ")
     BigDecimal findTotalDividaCliente(Long clienteId);
+
 }

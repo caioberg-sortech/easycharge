@@ -1,6 +1,8 @@
 package br.com.alura.srtch.model;
 
 
+import br.com.alura.srtch.repository.DividaRepository;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -107,5 +109,10 @@ public class Divida {
 
     public Long getClienteId(){
         return this.cliente.getId();
+    }
+
+    public  void setStatusRecuperacao(DividaRepository dividaRepository){
+        setStatus(StatusDivida.RECUPERACAO_JUDICIAL);
+        dividaRepository.save(this);
     }
 }

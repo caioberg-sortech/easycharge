@@ -1,12 +1,9 @@
 package br.com.alura.srtch.controller;
 
-import br.com.alura.srtch.config.validation.DividaValidacao;
+
 import br.com.alura.srtch.dto.CobrancaApiDto;
-import br.com.alura.srtch.dto.DividaApiDto;
 import br.com.alura.srtch.form.CobrancaForm;
-import br.com.alura.srtch.form.DividaForm;
 import br.com.alura.srtch.mapper.CobrancaMapper;
-import br.com.alura.srtch.mapper.DividaMapper;
 import br.com.alura.srtch.model.Cobranca;
 import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.repository.ClienteRepository;
@@ -48,10 +45,14 @@ public class CobrancasRestController {
             return ResponseEntity.badRequest().build();
         }
 
+        if(cobrancasRepository.findQuantidadeCobrancasEmDivida(dividaId) > 3){
+            dividaRepository.getById(dividaId).setStatusRecuperacao(dividaRepository);
+        }
+
         Cobranca cobranca = new CobrancaMapper().trnsformaCobrancaForm(cobrancaForm,dividaRepository);
         cobrancasRepository.save(cobranca);
 
         URI uri = uriBuilder.path("/api/cobrancas/{id}").buildAndExpand(cobranca.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DividaApiDto(divida));
+        return ResponseEntity.created(uri).body(new CobrancaApiDto(cobranca));
     }
 }

@@ -1,5 +1,6 @@
 package br.com.alura.srtch.dto;
 
+import br.com.alura.srtch.model.Cobranca;
 import br.com.alura.srtch.model.TipoAcordo;
 import br.com.alura.srtch.model.TipoAgente;
 
@@ -14,6 +15,19 @@ public class CobrancaApiDto {
     private TipoAgente tipoAgente;
     private String comentario;
     private Long dividaId;
+
+    public CobrancaApiDto() {
+
+    }
+
+    public CobrancaApiDto(Cobranca cobranca) {
+        this.dataCobranca = cobranca.getDataCobranca();
+        this.contato = cobranca.getContato();
+        this.agente = cobranca.getAgente();
+        this.tipoAgente = cobranca.getTipoAgente();
+        this.comentario = cobranca.getComentario();
+        this.dividaId = cobranca.getDivida().getId();
+    }
 
     public LocalDate getDataCobranca() {
         return dataCobranca;
