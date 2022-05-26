@@ -45,4 +45,6 @@ public class DividaRestController {
         URI uri = uriBuilder.path("/api/dividas/{id}").buildAndExpand(divida.getId()).toUri();
         return ResponseEntity.created(uri).body(new DividaApiDto(divida));
     }
+
+
 }
