@@ -15,61 +15,59 @@
                     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div class="navbar-nav">
                             <a class="nav-link active" aria-current="page" href="#">Lista</a>
-                            <a class="nav-link" th:href="@{/clienteFormulario/{id}(id=-1)}">Cadastrar</a>
+                            <a class="nav-link" href="/clienteFormulario">Cadastrar</a>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
 
-        <div class="container-fluid mt-5 pt-4 pb-4 bg-secondary">
+        <div class="container mt-5 pt-4 pb-4 bg-secondary">
             <div class="jumbotron jumbotron-fluid pt-4 pb-0 bg-light">
                 <div class="container text-center mt-2 ">
                     <h1 class="display-4">Lista Clientes</h1>
                 </div>
-                <div>
-                   <table class="table table-striped table-dark table-hover mt-4">
-                       <thead>
-                       <tr>
-                           <th scope="col">Nome do Cliente: </th>
-                           <th scope="col">CPF: </th>
-                           <th scope="col">Telefone: </th>
-                           <th scope="col">Status: </th>
-                           <th scope="col">Email: </th>
-                           <th scope="col">Profissão: </th>
-                           <th scope="col">Renda: </th>
-                           <th scope="col">Local: </th>
-                           <th scope="col">Alterar Status: </th>
-                           <th scope="col">Remover: </th>
-                           <th scope="col">Editar: </th>
-                       </tr>
-                       </thead>
-                       <tbody>
-                       <tr th:each="cliente : ${clientes}">
-                           <td><span th:text="${cliente.nome}">nome</span></td>
-                           <td><span th:text="${cliente.cpf}">cpf</span></td>
-                           <td><span th:text="${cliente.telefone}">telefone</span></td>
-                           <td><span th:text="${cliente.status}">status</span></td>
-                           <td><span th:text="${cliente.email}">email</span></td>
-                           <td><span th:text="${cliente.profissao}">profissao</span></td>
-                           <td><span th:text="${cliente.renda}">renda</span></td>
-                           <td><span th:text="${cliente.endereco.cidade}">cidade</span>/<span th:text="${cliente.endereco.estado}">estado</span></td>
-                           <td>
-                               <a class="btn btn-light w-100" th:href="@{/alterarStatus/{id}(id=${cliente.id})}" role="button">
-                                   <span th:if="${cliente.status.getTexto() == 'ATIVO'}">SUSPENDER</span>
-                                   <span th:if="${cliente.status.getTexto() == 'SUSPENSO'}">ATIVAR</span>
-                               </a>
-                           </td>
-                           <td>
-                               <a class="btn btn-warning" th:href="@{/clienteFormulario/{id}(id=${cliente.id})}" role="button">Alterar</a>
-                           </td>
-                           <td>
-                               <a class="btn btn-danger" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>
-                           </td>
-                       </tr>
-                       </tbody>
-                   </table>
-               </div>
+                <table class="table table-striped table-dark table-hover mt-4">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nome do Cliente: </th>
+                        <th scope="col">CPF: </th>
+                        <th scope="col">Telefone: </th>
+                        <th scope="col">Status: </th>
+                        <th scope="col">Email: </th>
+                        <th scope="col">Profissão: </th>
+                        <th scope="col">Renda: </th>
+                        <th scope="col">Local: </th>
+                        <th scope="col">Alterar Status: </th>
+                        <th scope="col">Remover: </th>
+                        <th scope="col">Editar: </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td><span th:text="${cliente.nome}">nome</span></td>
+                        <td><span th:text="${cliente.cpf}">cpf</span></td>
+                        <td><span th:text="${cliente.telefone}">telefone</span></td>
+                        <td><span th:text="${cliente.status}">status</span></td>
+                        <td><span th:text="${cliente.email}">email</span></td>
+                        <td><span th:text="${cliente.profissao}">profissao</span></td>
+                        <td><span th:text="${cliente.renda}">renda</span></td>
+                        <td><span th:text="${cliente.endereco.cidade}">cidade</span>/<span th:text="${cliente.endereco.estado}">estado</span></td>
+                        <td>
+                            <a class="btn btn-light w-100" th:href="@{/alterarStatus/{id}(id=${cliente.id})}" role="button">
+                                <span th:if="${cliente.status.getTexto() == 'ATIVO'}">SUSPENDER</span>
+                                <span th:if="${cliente.status.getTexto() == 'SUSPENSO'}">ATIVAR</span>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="btn btn-warning" th:href="@{/alterarClienteForm/{id}(id=${cliente.id})}" role="button">Alterar</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/remover/{id}(id=${cliente.id})}" role="button">Remover</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </body>

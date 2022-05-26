@@ -29,11 +29,10 @@
         </div>
     </div>
     <div class="container bg-light pb-3 pt-1 ">
-       <form th:object="${clienteDTO}" class="card-body" action="/cadastroOuAlteraCliente" method="post">
-           <input type="hidden" th:field="*{id}">
+       <form th:object="${clienteDTO}" class="card-body" action="/novoCliente" method="post">
            <div class="form-group">
                <label for="nome" class="form-label fs-5">Nome</label>
-               <input th:field="*{nome}" th:errorclass="is-invalid" type="text" class="form-control" id="nome" placeholder="Nome do cliente" required>
+               <input th:field="*{nome}" th:name="nome" th:value="${cliente.nome}" th:errorclass="is-invalid" type="text" class="form-control" id="nome" placeholder="Nome do cliente" required>
                <div class="invalid-feedback" th:errors="*{nome}"> Erros do nome cliente</div>
            </div>
            <div class="form-group">
