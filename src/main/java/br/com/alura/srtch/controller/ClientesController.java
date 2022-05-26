@@ -50,45 +50,35 @@ public class ClientesController {
         return "redirect:/listaClientes";
     }
 
-    @GetMapping("clienteFormulario")
-    public String clienteFormulario(Model model, Long id){
-        ClienteDTO clienteDTO;
+    @GetMapping("clienteFormulario/{id}")
+    public String clienteFormulario(Model model,@PathVariable Long id,ClienteDTO clienteDTO){
+
         if(id >= 0){
             Cliente cliente = clienteRepository.getById(id);
             clienteDTO = new ClienteMapper().transformarCliente(cliente);
-            model.addAttribute("cliente", clienteDTO);
+            model.addAttribute("clienteDTO", clienteDTO);
+        } else{
+            clienteDTO.setId(null);
         }
 
         return "clienteFormulario";
     }
 
-    @PostMapping("novoCliente")
-    public String novoCliente(@Valid ClienteDTO clienteDTO, BindingResult result){
+    @Transactional
+    @PostMapping("cadastroOuAlteraCliente")
+    public String cadastroOuAlteraCliente(@Valid ClienteDTO clienteDTO, BindingResult result){
 
         if (result.hasErrors()){
             return "clienteFormulario";
+        } else if(clienteDTO.getId() != null){
+            Cliente cliente = clienteRepository.getById(clienteDTO.getId());
+            new ClienteMapper().atualizarCliente(cliente,clienteDTO);
+            clienteRepository.save(cliente);
+            return "redirect:/listaClientes";
         }
+
         Cliente cliente = new ClienteMapper().transformarClienteDTO(clienteDTO);
-        clienteRepository.save(cliente);
-        return "redirect:/listaClientes";
-    }
 
-    @GetMapping("/alterarClienteForm/{id}")
-    public String alterarClienteForm(@PathVariable Long id, Model model){
-
-        Cliente cliente = clienteRepository.getById(id);
-        model.addAttribute("cliente", cliente);
-        return "alterarClienteForm";
-    }
-
-    @Transactional
-    @PostMapping("alterarCliente")
-    public String alterarCliente(@Valid ClienteDTO clienteDTO, BindingResult result){
-        if (result.hasErrors()){
-            return "cliente/formulario";
-        }
-        Cliente cliente = clienteRepository.getById(clienteDTO.getId());
-        new ClienteMapper().atualizarCliente(cliente,clienteDTO);
         clienteRepository.save(cliente);
         return "redirect:/listaClientes";
     }
