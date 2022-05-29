@@ -1,6 +1,9 @@
-const teste = document.querySelector("#nome")
+import {valida} from './validacao.js'
 
+const inputs = document.querySelectorAll('input')
 
-function testeDeQuery(){
-
-}
+inputs.forEach(input =>{
+    input.addEventListener('blur', (evento) =>{
+        valida(evento.target)
+    })
+})

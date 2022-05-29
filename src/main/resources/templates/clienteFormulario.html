@@ -32,41 +32,48 @@
                         <h2 class="gy-0">Dados Pessoais</h2>
                         <div class="form-group col-md-3">
                             <label for="nome" class="form-label fs-5">Nome</label>
-                            <input th:field="*{nome}" th:errorclass="is-invalid" type="text" class="form-control" id="nome" placeholder="Nome do cliente" required>
+                            <input th:field="*{nome}" th:errorclass="is-invalid" maxlength="255" type="text"
+                                   class="form-control" id="nome" placeholder="Nome do cliente" data-tipo="nome" required>
                             <div class="invalid-feedback" th:errors="*{nome}"> Erros do nome cliente</div>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="cpf" class="form-label fs-5">CPF</label>
-                            <input th:field="*{cpf}" th:errorclass="is-invalid" type="text" class="form-control" id="cpf" placeholder="CPF do cliente" required>
+                            <input th:field="*{cpf}" th:errorclass="is-invalid" maxlength="14" type="text"
+                                   class="form-control" id="cpf" placeholder="CPF do cliente" data-tipo="cpf" required>
                             <div class="invalid-feedback" th:errors="*{cpf}">
                                 Erros do cpf do cliente
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="telefone" class="form-label fs-5">Telefone</label>
-                            <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" class="form-control" id="telefone" placeholder="Telefone do cliente" required>
+                            <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" maxlength="20"
+                                   class="form-control" id="telefone" placeholder="Telefone do cliente"
+                                   pattern="^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$" data-tipo="telefone" required>
                             <div class="invalid-feedback" th:errors="*{telefone}">
                                 Erros do telefone do cliente
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="email" class="form-label fs-5">Email</label>
-                            <input th:field="*{email}" type="email" th:errorclass="is-invalid" class="form-control" id="email" placeholder="Email do cliente" required>
+                            <input th:field="*{email}" type="email" th:errorclass="is-invalid" class="form-control"
+                                   id="email" placeholder="Email do cliente" data-tipo="email" required>
                             <div class="invalid-feedback" th:errors="*{email}">
                                 Erros do email do cliente
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="profissao" class="form-label fs-5">Profissão</label>
-                            <input th:field="*{profissao}" type="text" th:errorclass="is-invalid" class="form-control" id="profissao" required>
+                            <input th:field="*{profissao}" type="text" th:errorclass="is-invalid" class="form-control"
+                                   id="profissao" data-tipo="profissao" required>
                             <div class="invalid-feedback" th:errors="*{profissao}">
                                 Erros da profissao do cliente
                             </div>
                         </div>
                         <div class="form-group col-md-3">
                             <label for="renda" class="form-label fs-5">Renda</label>
-                            <input th:field="*{renda}" th:errorclass="is-invalid" type="text" class="form-control" id="renda" required>
-                            <div th:erros="*{renda}">
+                            <input th:field="*{renda}" th:errorclass="is-invalid" type="text" class="form-control"
+                                   id="renda" data-tipo="renda" required>
+                            <div class="invalid-feedback" th:erros="*{renda}">
                                 Erros da renda do cliente
                             </div>
                         </div>
@@ -116,7 +123,7 @@
                         <div class="form-group col-md-3">
                             <label for="estado" class="form-label fs-5">Estado</label>
                             <select th:field="*{estado}" th:errorclass="is-invalid" id="estado" class="form-select">
-                                <option selected disabled value="">Selecione...</option>
+                                <option selected value="">Selecione...</option>
                                 <option value="AC">AC</option>
                                 <option value="AL">AL</option>
                                 <option value="AP">AP</option>
@@ -153,10 +160,8 @@
                             <button class="btn btn-primary " type="submit">Cadastrar</button>
                         </div>
                     </form>
-
             </section>
         </main>
-
-<!--        <script src="/static/validacao.js"></script>-->
+        <script src="/static/app.js" type="module"></script>
     </body>
 </html>
