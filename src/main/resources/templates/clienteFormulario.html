@@ -97,8 +97,8 @@
                         </div>
                         <div class="form-group col-md-3">
                             <label for="numero" class="form-label fs-5">Número</label>
-                            <input th:field="*{numero}" type="number" th:errorclass="is-invalid" class="form-control"
-                                   id="numero" data-tipo="numero" required>
+                            <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control"
+                                   id="numero" data-tipo="numero" pattern="\w*\/?\w*" required>
                             <div class="invalid-feedback" th:errors="*{numero}">
                                 Erros do número do cliente
                             </div>
@@ -171,4 +171,5 @@
         </main>
     </body>
     <script src="./static/app.js" type="module"></script>
+    <script src="https://github.com/codermarcos/simple-mask-money/releases/download/v3.0.0/simple-mask-money.js"></script>
 </html>
