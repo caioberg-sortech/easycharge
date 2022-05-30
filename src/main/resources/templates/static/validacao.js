@@ -1,6 +1,8 @@
+
 const validadores = {
     cpf:input => validaCPF(input),
-    renda: input => validaRenda(input)
+    renda: input => validaRenda(input),
+    telefone: input => formataTelefone(input)
 
 }
 
@@ -8,7 +10,6 @@ export function valida(input){
     const tipoInput = input.dataset.tipo
 
     if(validadores[tipoInput]){
-        console.log('entrou' + tipoInput)
         validadores[tipoInput](input)
     }
 
@@ -83,7 +84,6 @@ const mensagensDeErro = {
 
 }
 
-
 function mostraMensagemDeError(tipoDeInput, input){
 
     let mensagem = ''
@@ -103,6 +103,8 @@ function validaCPF(input) {
 
     if(!checaCPFRepetido(cpfFormatado) || !checaEstruturaCPF(cpfFormatado)) {
         mensagem = 'O CPF digitado não é válido.'
+    } else {
+        input.value = cpfFormatado.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
     }
 
     input.setCustomValidity(mensagem)
@@ -142,7 +144,6 @@ function checaDigitoVerificador(cpf, multiplicador) {
     if(multiplicador >= 12) {
         return true
     }
-
     let multiplicadorInicial = multiplicador
     let soma = 0
     const cpfSemDigitos = cpf.substr(0, multiplicador - 1).split('')
@@ -161,4 +162,9 @@ function checaDigitoVerificador(cpf, multiplicador) {
 
 function confirmaDigito(soma) {
     return 11 - (soma % 11)
+}
+
+function formataTelefone(input) {
+    const telNumeros = input.value.replace(/\D/g, '')
+    input.value = telNumeros.replace(/(\d{2})(\d{5})(\d{4})/,'($1) $2-$3')
 }
