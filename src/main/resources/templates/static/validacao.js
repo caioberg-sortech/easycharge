@@ -9,6 +9,8 @@ const validadores = {
 export function valida(input){
     const tipoInput = input.dataset.tipo
 
+    console.log(tipoInput)
+
     if(validadores[tipoInput]){
         validadores[tipoInput](input)
     }
@@ -51,7 +53,7 @@ const mensagensDeErro = {
         valueMissing: 'O campo profissão não pode estar vazio'
     },
     renda:{
-        valueMissing: 'O campo email não pode estar vazio'
+        valueMissing: 'O campo renda não pode estar vazio'
     },
     rua:{
         valueMissing: 'O campo rua não pode estar vazio'
@@ -78,7 +80,7 @@ function mostraMensagemDeError(tipoDeInput, input){
 
     tiposDeErro.forEach(erro => {
         if(input.validity[erro]){
-            mensagem = mensagem + mensagensDeErro[tipoDeInput][erro] + ';'
+            mensagem = mensagem + mensagensDeErro[tipoDeInput][erro] + ';\n'
         }
     })
 
