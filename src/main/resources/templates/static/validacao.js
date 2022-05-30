@@ -39,7 +39,9 @@ const mensagensDeErro = {
         valueMissing: 'O campo CPF não pode estar vazio'
     },
     telefone:{
-        valueMissing: 'O campo telefone não pode estar vazio'
+        valueMissing: 'O campo telefone não pode estar vazio',
+        patternMismatch: 'O número digitado está errado. Alguns exemplos aceitos:' +
+            '\n(DDD) 9xxxx-xxxx, \nDDD 9xxxx-xxxx, \nDDD9xxxxxxxx'
     },
     email: {
         valueMissing: 'O campo email não pode estar vazio',
