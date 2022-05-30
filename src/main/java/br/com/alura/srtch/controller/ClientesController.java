@@ -19,8 +19,11 @@ import java.util.List;
 @Controller
 public class ClientesController {
 
-    @Autowired
-    private ClienteRepository clienteRepository;
+    private final ClienteRepository clienteRepository;
+
+    public ClientesController(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     @GetMapping("listaClientes")
     public String listarClientes(Model model){

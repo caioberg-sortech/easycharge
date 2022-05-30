@@ -1,3 +1,7 @@
+function validaCPF(input) {
+    
+}
+
 const validadores = {
     cpf:input => validaCPF(input)
 }
@@ -10,9 +14,22 @@ export function valida(input){
     }
 
     if(input.validity.valid){
-
+        input.classList.remove('is-invalid')
+        input.classList.add('is-valid')
+        input.parentElement.querySelector('.invalid-feedback').innerHTML = ''
+    }else {
+        input.classList.add('is-invalid')
+        input.classList.remove('is-valid')
+        input.parentElement.querySelector('.invalid-feedback').innerHTML = mostraMensagemDeError(tipoInput,input)
     }
 }
+
+const tiposDeErro = [
+    'valueMissing',
+    'typeMismatch',
+    'customError',
+    'patternMismatch'
+]
 
 const mensagensDeErro = {
     nome : {
@@ -53,3 +70,16 @@ const mensagensDeErro = {
 }
 
 
+function mostraMensagemDeError(tipoDeInput, input){
+
+    let mensagem = ''
+
+    tiposDeErro.forEach(erro => {
+        if(input.validity[erro]){
+            mensagem = mensagem + mensagensDeErro[tipoDeInput][erro] + ';'
+        }
+    })
+
+    return mensagem
+
+}
