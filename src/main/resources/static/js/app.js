@@ -1,4 +1,4 @@
-import {valida} from './validacao.js'
+import {valida} from '/validacao.js'
 
 const inputs = document.querySelectorAll('input')
 const select = document.querySelector('#estado')
@@ -26,10 +26,6 @@ button.addEventListener('click' , (evento) =>{
     })
     valida(select)
 
-})
-
-button.addEventListener('submit',(evento) =>{
-    renda.value = renda.value.replace(/(R\$\s)/g, '').replace(/\D/g ,'.' )
 })
 
 select.addEventListener('change',(evento) =>{
