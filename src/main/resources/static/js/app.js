@@ -1,8 +1,8 @@
-import {valida} from '/validacao.js'
+import {valida} from './validacao.js'
 
 const inputs = document.querySelectorAll('input')
 const select = document.querySelector('#estado')
-const button = document.querySelector('#cadastro')
+const form = document.querySelector('form')
 const renda = document.querySelector('#renda')
 
 inputs.forEach(input =>{
@@ -17,15 +17,13 @@ inputs.forEach(input =>{
         })
     }
     input.addEventListener('blur', (evento) =>{
-        valida(input)
+        valida(evento.target)
     })
-})
-button.addEventListener('click' , (evento) =>{
-    inputs.forEach(input =>{
-        valida(input)
-    })
-    valida(select)
 
+})
+
+form.addEventListener('submit', (evento) =>{
+    renda.value =  SimpleMaskMoney.formatToNumber(renda.value)
 })
 
 select.addEventListener('change',(evento) =>{

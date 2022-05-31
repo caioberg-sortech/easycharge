@@ -20,7 +20,6 @@ export function valida(input){
     }else {
         input.classList.add('is-invalid')
         input.classList.remove('is-valid')
-        console.log(input.parentElement.querySelector('.invalid-feedback'))
         input.parentElement.querySelector('.invalid-feedback').innerHTML = mostraMensagemDeError(tipoInput,input)
     }
 }
