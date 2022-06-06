@@ -30,7 +30,6 @@ public class ClientesController {
         List<Cliente> clientes = clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "status").and(Sort.by(Sort.Direction.ASC, "nome")));
         model.addAttribute("clientes", clientes);
         return "listaClientes";
-
     }
 
     @GetMapping("/remover/{id}")

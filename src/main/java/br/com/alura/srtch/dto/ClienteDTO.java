@@ -13,50 +13,42 @@ import java.util.stream.Collectors;
 
 public class ClienteDTO {
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "O campo Nome não pode estar vazio")
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "O campo CPF não pode estar vazio")
     private String cpf;
 
-    @NotBlank
+    @NotBlank(message = "O campo Telefone não pode estar vazio")
     private String telefone;
 
-    @NotBlank
+    @NotBlank(message = "O campo email não pode estar vazio")
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "O campo rua não pode estar vazio")
     private String rua;
 
-    @NotBlank
+    @NotBlank(message = "O campo número não pode estar vazio")
     private String numero;
 
     private String complemento;
 
-    @NotBlank
+    @NotBlank(message = "O campo bairro não pode estar vazio")
     private String bairro;
 
-    @NotBlank
+    @NotBlank(message = "O campo cidade não pode estar vazio")
     private String cidade;
 
-    @NotBlank
+    @NotBlank(message = "O campo estado não pode estar vazio")
     private String estado;
 
-    @NotBlank
+    @NotBlank(message = "O campo profissão não pode estar vazio")
     private String profissao;
 
     @NotNull
-    @Positive
+    @Positive(message = "A renda não pode ser zero")
     private BigDecimal renda;
 
     @NotNull
@@ -80,6 +72,14 @@ public class ClienteDTO {
         this.profissao = cliente.getProfissao();
         this.renda = cliente.getRenda();
         this.status = cliente.getStatus();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
