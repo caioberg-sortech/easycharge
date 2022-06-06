@@ -1,11 +1,9 @@
 import valida from "./validacao.js";
-
-const inputs  = document.querySelectorAll('input')
-const select: HTMLInputElement = document.querySelector('#estado')
-const form: HTMLFormElement  = document.querySelector('form')
-
-inputs.forEach(input =>{
-    if(input.dataset.tipo === 'renda') {
+const inputs = document.querySelectorAll('input');
+const select = document.querySelector('#estado');
+const form = document.querySelector('form');
+inputs.forEach(input => {
+    if (input.dataset.tipo === 'renda') {
         /*SimpleMaskMoney.setMask(input, {
             prefix: 'R$ ',
             fixed: true,
@@ -19,11 +17,9 @@ inputs.forEach(input =>{
         })*/
     }
     input.addEventListener('blur', function () {
-        valida(input)
-    })
-
-})
-
-select.addEventListener('change',function (){
-    valida(select)
-})
+        valida(input);
+    });
+});
+select.addEventListener('change', function () {
+    valida(select);
+});
