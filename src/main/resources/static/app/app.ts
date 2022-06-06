@@ -3,10 +3,11 @@ import valida from "./validacao.js";
 const inputs  = document.querySelectorAll('input')
 const select: HTMLInputElement = document.querySelector('#estado')
 const form: HTMLFormElement  = document.querySelector('form')
+const SimpleMaskMoney =  require('simple-mask-money');
 
 inputs.forEach(input =>{
     if(input.dataset.tipo === 'renda') {
-        /*SimpleMaskMoney.setMask(input, {
+        SimpleMaskMoney.setMask(input, {
             prefix: 'R$ ',
             fixed: true,
             fractionDigits: 2,
@@ -16,7 +17,7 @@ inputs.forEach(input =>{
         })
         form.addEventListener('submit', (evento) =>{
             input.value = SimpleMaskMoney.formatToNumber(input.value)
-        })*/
+        })
     }
     input.addEventListener('blur', function () {
         valida(input)
