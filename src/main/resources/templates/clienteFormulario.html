@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Cadastro Cliente</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand navbar-dark bg-dark d-flex justify-content-between">
+                <div class="container-fluid">
+                    <a class="navbar-brand ms-lg-4">EasyCharge</a>
+                    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                        <ul class="navbar-nav">
+                            <li><a class="nav-link" href="/listaClientes">Lista</a></li>
+                            <li><a th:classappend="${clienteDTO.id} == null ? 'active' : '' " class="nav-link" aria-current="page" href="#">Cadastrar</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section class="container">
+                <div class="jumbotron jumbotron-fluid mt-3 mb-5">
+                        <h1 class="display-4 text-center">Cadastro</h1>
+                </div>
+                    <form th:object="${clienteDTO}" class="card-body bg-light row gx-5 gy-4" action="/cadastroOuAlteraCliente" method="post" novalidate>
+                        <input type="hidden" th:field="*{id}">
+                        <h2 class="gy-0">Dados Pessoais</h2>
+                        <div class="form-group col-md-3">
+                            <label for="nome" class="form-label fs-5">Nome</label>
+                            <input th:field="*{nome}" th:errorclass="is-invalid" maxlength="255" type="text"
+                                   class="form-control" id="nome" placeholder="Nome do cliente" data-tipo="nome" required>
+                            <div class="invalid-feedback"> <span th:errors="*{nome}">Erro no nome cliente</span></div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="cpf" class="form-label fs-5">CPF</label>
+                            <input th:field="*{cpf}" th:errorclass="is-invalid" maxlength="14" type="text"
+                                   class="form-control" id="cpf" placeholder="CPF do cliente" data-tipo="cpf" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{cpf}">Erros do CPF do Cliente</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="telefone" class="form-label fs-5">Telefone</label>
+                            <input th:field="*{telefone}" type="tel" th:errorclass="is-invalid" maxlength="20"
+                                   class="form-control" id="telefone" placeholder="Telefone do cliente"
+                                   pattern="\(?\d{2}\)?\s?9\d{4}-?\d{4}" data-tipo="telefone" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{telefone}">Erro no Telefone do Cliente</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="email" class="form-label fs-5">Email</label>
+                            <input th:field="*{email}" type="email" th:errorclass="is-invalid" class="form-control"
+                                   id="email" placeholder="Email do cliente" data-tipo="email" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{email}">Erros no Email do Cliente</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="profissao" class="form-label fs-5">Profissão</label>
+                            <input th:field="*{profissao}" type="text" th:errorclass="is-invalid" class="form-control"
+                                   id="profissao" data-tipo="profissao" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{profissao}">Erros na Profissão do cliente</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="renda" class="form-label fs-5">Renda</label>
+                            <input th:field="*{renda}" th:errorclass="is-invalid" type="text" class="form-control"
+                                   id="renda" data-tipo="renda" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{renda}">Erros na Renda do Cliente</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="status" class="form-label fs-5">Status</label>
+                            <select th:field="*{status}" id="status" class="form-select">
+                                <option selected value="ATIVO">Ativo</option>
+                                <option value="SUSPENSO">Suspenso</option>
+                            </select>
+                        </div>
+                        <h4 class="gy-0">Endereco</h4>
+                        <div class="form-group col-md-3">
+                            <label for="rua" class="form-label fs-5">Rua</label>
+                            <input th:field="*{rua}" type="text" th:errorclass="is-invalid" class="form-control" id="rua"
+                                maxlength="300" data-tipo="rua" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{rua}">Erros na Rua do Endereco</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="numero" class="form-label fs-5">Número</label>
+                            <input th:field="*{numero}" type="text" th:errorclass="is-invalid" class="form-control"
+                                   id="numero" data-tipo="numero" pattern="\w*\/?\w*" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{numero}">Erros no Numero do Endereco</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="complemento" class="form-label fs-5">Complemento</label>
+                            <input th:field="*{complemento}" type="text" class="form-control" id="complemento" maxlength="300" >
+                            <div class="invalid-feedback">
+                                <span th:errors="*{complemento}">Erros no Complemento do Endereco</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="bairro" class="form-label fs-5">Bairro</label>
+                            <input th:field="*{bairro}" type="text" th:errorclass="is-invalid" class="form-control" id="bairro"
+                                maxlength="200" data-tipo="bairro" required>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{bairro}">Erros no Bairro do Endereco</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="cidade" class="form-label fs-5">Cidade</label>
+                            <input th:field="*{cidade}" type="text" th:errorclass="is-invalid" class="form-control" id="cidade"
+                                   data-tipo="cidade" maxlength="150" required >
+                            <div class="invalid-feedback">
+                                <span th:errors="*{cidade}">Erros na Cidade de Endereco</span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="estado" class="form-label fs-5">Estado</label>
+                            <select th:field="*{estado}" th:errorclass="is-invalid" id="estado" class="form-select"
+                                    data-tipo="estado" required >
+                                <option selected value="">Selecione...</option>
+                                <option value="AC">AC</option>
+                                <option value="AL">AL</option>
+                                <option value="AP">AP</option>
+                                <option value="AM">AM</option>
+                                <option value="BA">BA</option>
+                                <option value="CE">CE</option>
+                                <option value="DF">DF</option>
+                                <option value="ES">ES</option>
+                                <option value="GO">GO</option>
+                                <option value="MA">MA</option>
+                                <option value="MS">MS</option>
+                                <option value="MT">MT</option>
+                                <option value="MG">MG</option>
+                                <option value="PA">PA</option>
+                                <option value="PB">PB</option>
+                                <option value="PR">PR</option>
+                                <option value="PE">PE</option>
+                                <option value="PI">PI</option>
+                                <option value="RJ">RJ</option>
+                                <option value="RN">RN</option>
+                                <option value="RS">RS</option>
+                                <option value="RO">RO</option>
+                                <option value="RR">RR</option>
+                                <option value="SC">SC</option>
+                                <option value="SP">SP</option>
+                                <option value="SE">SE</option>
+                                <option value="TO">TO</option>
+                            </select>
+                            <div class="invalid-feedback">
+                                <span th:errors="*{estado}">Erros no Estado de Endereco</span>
+                            </div>
+                        </div>
+                        <div class="col-12 mt-3">
+                            <button class="btn btn-primary " id="cadastro" type="submit">Cadastrar</button>
+                        </div>
+                    </form>
+            </section>
+        </main>
+    </body>
+    <script src="/dist/js/app.js" type="module"></script>
+    <script src="https://github.com/codermarcos/simple-mask-money/releases/download/v3.0.0/simple-mask-money.js"></script>
+</html>
