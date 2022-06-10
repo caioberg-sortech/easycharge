@@ -66,4 +66,10 @@ public class ClienteRestController {
         return ResponseEntity.badRequest().build();
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity remover(@PathVariable Long id){
+        clienteRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
 }
