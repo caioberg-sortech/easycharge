@@ -32,7 +32,7 @@
                         <div class="form-group col-md-3">
                             <label for="nome" class="form-label fs-5">Nome</label>
                             <input th:field="*{nome}" th:errorclass="is-invalid" maxlength="255" type="text"
-                                   class="form-control" id="nome" placeholder="Nome do cliente" data-tipo="nome" required>
+                                   class="form-control" id="nome" placeholder="Nome do cliente" data-tipo="nome" autofocus required>
                             <div class="invalid-feedback"> <span th:errors="*{nome}">Erro no nome cliente</span></div>
                         </div>
                         <div class="form-group col-md-2">

@@ -44,7 +44,6 @@ public class CobrancasRestController {
         if(!dividaRepository.existsById(dividaId) ){
             return ResponseEntity.badRequest().build();
         }
-
         if(cobrancasRepository.findQuantidadeCobrancasEmDivida(dividaId) > 3){
             dividaRepository.getById(dividaId).setStatusRecuperacao(dividaRepository);
         }

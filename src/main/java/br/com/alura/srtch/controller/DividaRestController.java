@@ -18,6 +18,7 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/dividas")
+@CrossOrigin
 public class DividaRestController {
 
     private final DividaRepository dividaRepository;
