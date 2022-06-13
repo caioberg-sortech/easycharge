@@ -139,4 +139,12 @@ public class Cliente {
   public void setId(Long id) {
     this.id = id;
   }
+
+  public void atualizarStatus(){
+    if(this.status.equals(StatusCliente.SUSPENSO)){
+      setStatus(StatusCliente.ATIVO);
+    }else {
+      setStatus(StatusCliente.SUSPENSO);
+    }
+  }
 }

@@ -5,11 +5,10 @@ import br.com.alura.srtch.model.StatusCliente;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ClienteApiDTO {
 
+    private Long id;
     private String nome;
     private String cpf;
     private String telefone;
@@ -18,12 +17,21 @@ public class ClienteApiDTO {
     private StatusCliente status;
 
     public ClienteApiDTO(Cliente cliente){
+        this.id = cliente.getId();
         this.local= cliente.getEndereco().getCidade() + "/" +  cliente.getEndereco().getEstado()  ;
         this.cpf = cliente.getCpf();
         this.nome = cliente.getNome();
         this.renda = cliente.getRenda();
         this.status = cliente.getStatus();
         this.telefone = cliente.getTelefone();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
