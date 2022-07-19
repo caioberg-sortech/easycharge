@@ -14,7 +14,7 @@ public class ClienteMapper {
 
     StatusCliente statusCliente = StatusCliente.ATIVO;
 
-    public List<Cliente> transformarListaClientesDTO(List<ClienteDTO> clientesDTO){
+    public List<Cliente> transformarListaClientesDTO(List<ClienteDTO> clientesDTO) {
 
         List<Cliente> clientes = new ArrayList<>();
 
@@ -23,30 +23,30 @@ public class ClienteMapper {
 
             if (c.getStatus().equals("SUSPENSO")) statusCliente = StatusCliente.SUSPENSO;
 
-            Endereco endereco = new Endereco(c.getRua(),c.getNumero(),c.getComplemento(),c.getBairro(),
-                    c.getCidade(),c.getEstado());
-            clientes.add(new Cliente(c.getNome(),c.getCpf(),c.getTelefone(),c.getEmail(),c.getProfissao(),
-                    c.getRenda(),endereco,statusCliente));
+            Endereco endereco = new Endereco(c.getRua(), c.getNumero(), c.getComplemento(), c.getBairro(),
+                    c.getCidade(), c.getEstado());
+            clientes.add(new Cliente(c.getNome(), c.getCpf(), c.getTelefone(), c.getEmail(), c.getProfissao(),
+                    c.getRenda(), endereco, statusCliente));
         }
 
         return clientes;
     }
 
-    public Cliente transformarClienteDTO(ClienteDTO clienteDTO){
+    public Cliente transformarClienteDTO(ClienteDTO clienteDTO) {
         Cliente cliente;
 
-            if (clienteDTO.getStatus().equals("SUSPENSO")) statusCliente = StatusCliente.SUSPENSO;
+        if (clienteDTO.getStatus().equals("SUSPENSO")) statusCliente = StatusCliente.SUSPENSO;
 
-            Endereco endereco = new Endereco(clienteDTO.getRua(),clienteDTO.getNumero(),clienteDTO.getComplemento(),clienteDTO.getBairro(),
-                    clienteDTO.getCidade(),clienteDTO.getEstado());
-            cliente = new Cliente(clienteDTO.getNome(),clienteDTO.getCpf(),clienteDTO.getTelefone(),clienteDTO.getEmail(),clienteDTO.getProfissao(),
-                    clienteDTO.getRenda(),endereco,statusCliente);
+        Endereco endereco = new Endereco(clienteDTO.getRua(), clienteDTO.getNumero(), clienteDTO.getComplemento(), clienteDTO.getBairro(),
+                clienteDTO.getCidade(), clienteDTO.getEstado());
+        cliente = new Cliente(clienteDTO.getNome(), clienteDTO.getCpf(), clienteDTO.getTelefone(), clienteDTO.getEmail(), clienteDTO.getProfissao(),
+                clienteDTO.getRenda(), endereco, statusCliente);
 
 
         return cliente;
     }
 
-    public ClienteDTO transformarCliente(Cliente c){
+    public ClienteDTO transformarCliente(Cliente c) {
         ClienteDTO clienteDTO = new ClienteDTO();
 
         clienteDTO.setNome(c.getNome());
@@ -66,7 +66,7 @@ public class ClienteMapper {
         return clienteDTO;
     }
 
-    public Cliente atualizarCliente(Cliente cliente, ClienteDTO clienteDTO){
+    public Cliente atualizarCliente(Cliente cliente, ClienteDTO clienteDTO) {
 
         cliente.setCpf(clienteDTO.getCpf());
         cliente.setEmail(clienteDTO.getEmail());
@@ -83,7 +83,7 @@ public class ClienteMapper {
         Endereco endereco;
         endereco = new Endereco(form.getRua(), form.getNumero(), form.getComplemento(), form.getBairro(), form.getCidade(), form.getEstado());
 
-        return new Cliente(form.getNome(), form.getCpf(), form.getTelefone(), form.getEmail(), form.getProfissao(), form.getRenda(), endereco, form.getStatus() );
+        return new Cliente(form.getNome(), form.getCpf(), form.getTelefone(), form.getEmail(), form.getProfissao(), form.getRenda(), endereco, StatusCliente.ATIVO);
     }
 
 }

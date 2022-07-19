@@ -5,7 +5,6 @@ import br.com.alura.srtch.dto.ClienteDetalhamentoDTO;
 import br.com.alura.srtch.form.ClienteForm;
 import br.com.alura.srtch.mapper.ClienteMapper;
 import br.com.alura.srtch.model.Cliente;
-import br.com.alura.srtch.model.StatusCliente;
 import br.com.alura.srtch.projection.ClienteRelatorioProjection;
 import br.com.alura.srtch.repository.ClienteRepository;
 import org.springframework.cache.annotation.CacheEvict;
@@ -34,16 +33,16 @@ public class ClienteRestController {
     }
 
     @GetMapping("/api/clientes")
-    public Page<ClienteApiDTO> lista(@PageableDefault(size = 5, page = 0, sort = {"status", "nome"}, direction = Sort.Direction.ASC) Pageable paginacao){
+    public Page<ClienteApiDTO> lista(@PageableDefault(size = 5, page = 0, sort = {"status", "nome"}, direction = Sort.Direction.ASC) Pageable paginacao) {
         Page<Cliente> clientes = clienteRepository.findAll(paginacao);
-        return  ClienteApiDTO.converter(clientes);
+        return ClienteApiDTO.converter(clientes);
 
     }
 
     @PostMapping("/api/clientes")
     @CacheEvict(value = "relatorioCliente", allEntries = true)
     @Transactional
-    public ResponseEntity<ClienteApiDTO> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<ClienteApiDTO> cadastrar(@RequestBody @Valid ClienteForm form, UriComponentsBuilder uriBuilder) {
         Cliente cliente = new ClienteMapper().cadastrar(form);
         clienteRepository.save(cliente);
 
@@ -53,29 +52,30 @@ public class ClienteRestController {
 
     @GetMapping("/api/clientes/report")
     @Cacheable(value = "relatorioCliente")
-   public List<ClienteRelatorioProjection> relatorio(){
-        return clienteRepository.findTotalDividasCobrancasPorNome();}
+    public List<ClienteRelatorioProjection> relatorio() {
+        return clienteRepository.findTotalDividasCobrancasPorNome();
+    }
 
     @GetMapping("/{id}")
-    public ClienteDetalhamentoDTO detalhamentoCliente(@PathVariable Long id){
+    public ClienteDetalhamentoDTO detalhamentoCliente(@PathVariable Long id) {
         Cliente cliente = clienteRepository.getById(id);
         return new ClienteDetalhamentoDTO(cliente);
     }
 
     @GetMapping("/api/aW52YWxpZGEgcmVsYXTDs3JpbyBkZSBjbGllbnRlcw")
     @CacheEvict(value = "relatorioCliente", allEntries = true)
-    public ResponseEntity<?> invalidacaoCache(){
+    public ResponseEntity<?> invalidacaoCache() {
         return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/api/clientes/{id}")
-    public ResponseEntity remover(@PathVariable Long id){
+    public ResponseEntity remover(@PathVariable Long id) {
         clienteRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/api/clientes/status/{id}")
-    public ResponseEntity atualizaClienteStatus(@PathVariable Long id){
+    public ResponseEntity atualizaClienteStatus(@PathVariable Long id) {
         Cliente cliente = clienteRepository.getById(id);
         cliente.atualizarStatus();
         clienteRepository.save(cliente);

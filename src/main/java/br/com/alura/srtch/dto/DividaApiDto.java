@@ -4,6 +4,8 @@ import br.com.alura.srtch.model.Divida;
 import br.com.alura.srtch.model.StatusDivida;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DividaApiDto {
 
@@ -63,6 +65,10 @@ public class DividaApiDto {
 
     public void setDescricaoDeQuitacao(String descricaoDeQuitacao) {
         this.descricaoDeQuitacao = descricaoDeQuitacao;
+    }
+
+    public static List<DividaApiDto> converter(List<Divida> dividas){
+        return dividas.stream().map(DividaApiDto::new).collect(Collectors.toList());
     }
 
 }

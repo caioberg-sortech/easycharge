@@ -1,10 +1,6 @@
 package br.com.alura.srtch.form;
 
-import br.com.alura.srtch.model.StatusCliente;
-
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
@@ -43,12 +39,8 @@ public class ClienteForm {
     @NotBlank
     private String profissao;
 
-    @NotNull
     @Positive
     private BigDecimal renda;
-
-    @NotNull
-    private StatusCliente status;
 
     public String getNome() {
         return nome;
@@ -144,13 +136,5 @@ public class ClienteForm {
 
     public void setRenda(BigDecimal renda) {
         this.renda = renda;
-    }
-
-    public StatusCliente getStatus() {
-        return status;
-    }
-
-    public void setStatus(StatusCliente status) {
-        this.status = status;
     }
 }

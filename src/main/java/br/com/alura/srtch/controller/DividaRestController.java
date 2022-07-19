@@ -15,6 +15,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/dividas")
@@ -27,6 +28,18 @@ public class DividaRestController {
     public DividaRestController(DividaRepository dividaRepository, ClienteRepository clienteRepository) {
         this.dividaRepository = dividaRepository;
         this.clienteRepository = clienteRepository;
+    }
+
+    @GetMapping
+    public List<DividaApiDto> lista(){
+        List<Divida> dividas = dividaRepository.findAll();
+        return DividaApiDto.converter(dividas);
+    }
+
+    @GetMapping("/{id}")
+    public List<DividaApiDto> listaDividaDoCliente(@PathVariable Long id){
+        List<Divida> dividas = dividaRepository.findAllByClienteId(id);
+        return DividaApiDto.converter(dividas);
     }
 
     @PostMapping
